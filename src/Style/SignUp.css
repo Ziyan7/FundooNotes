@@ -1,0 +1,23 @@
+.paperStyle {
+  padding: 20;
+  margin: 20px auto;
+  height: 70vh;
+  width: 45%;
+}
+.loginStyle {
+  padding: 20;
+  margin: 20px auto;
+  height: 60vh;
+  width: 30%;
+}
+/* .SignIn{
+  width: 100%; margin-left: 70px 
+} */
+/* .firstName{
+   width: 40%; margin: 10px
+}
+
+.lastName{
+  width: 40%; margin: 10px
+} */
+
