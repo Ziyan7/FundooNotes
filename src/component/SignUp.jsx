@@ -30,8 +30,13 @@ class SignUp extends Component {
       confirmError: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.nameRef = React.createRef();
   }
-  firsthandler = (event) => {
+  componentDidMount(){
+    this.nameRef.current.focus();
+    console.log(this.nameRef)
+  }
+  firstHandler = (event) => {
     if (validation.firstName(event)) {
       this.setState({
         firstName: event.target.value,
@@ -43,7 +48,7 @@ class SignUp extends Component {
       });
     }
   };
-  lasthandler = (event) => {
+  lastHandler = (event) => {
     if (validation.LastName(event)) {
       this.setState({
         firstName: event.target.value,
@@ -56,7 +61,7 @@ class SignUp extends Component {
     }
   };
 
-  emailhandler = (event) => {
+  emailHandler = (event) => {
     if (validation.email(event)) {
       this.setState({
         email: event.target.value,
@@ -69,7 +74,7 @@ class SignUp extends Component {
     }
   };
 
-  passwordhandler = (event) => {
+  passwordHandler = (event) => {
     if (validation.password(event)) {
       this.setState({
         password: event.target.value,
@@ -82,7 +87,7 @@ class SignUp extends Component {
     }
   };
 
-  confirmhandler = (event) => {
+  confirmHandler = (event) => {
     if (this.state.password == event.target.value) {
       this.setState({
         confirm: event.target.value,
@@ -120,6 +125,7 @@ class SignUp extends Component {
               <item>
                 <Grid>
                   <TextField
+                    ref = {this.nameRef}
                     label="First Name"
                     variant="outlined"
                     size="small"
@@ -128,7 +134,7 @@ class SignUp extends Component {
                       margin: "10px",
                       marginBottom: "0px",
                     }}
-                    onChange={this.firsthandler}
+                    onChange={this.firstHandler}
                     required
                   />
                   <TextField
@@ -140,7 +146,7 @@ class SignUp extends Component {
                       margin: "10px",
                       marginBottom: "0px",
                     }}
-                    onChange={this.lasthandler}
+                    onChange={this.lastHandler}
                     required
                   />
                   <FormHelperText style={{ marginLeft: "12px ", color: "red" }}>
@@ -165,7 +171,7 @@ class SignUp extends Component {
                         </InputAdornment>
                       ),
                     }}
-                    onChange={this.emailhandler}
+                    onChange={this.emailHandler}
                     required
                   />
                   <FormHelperText
@@ -185,7 +191,7 @@ class SignUp extends Component {
                     size="small"
                     type="password"
                     style={{ width: "40%", margin: "10px" }}
-                    onChange={this.passwordhandler}
+                    onChange={this.passwordHandler}
                     required
                   />
                   <TextField
@@ -194,7 +200,7 @@ class SignUp extends Component {
                     size="small"
                     type="password"
                     style={{ width: "40%", margin: "10px" }}
-                    onChange={this.confirmhandler}
+                    onChange={this.confirmHandler}
                     required 
                   />
                   <FormHelperText

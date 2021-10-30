@@ -10,11 +10,31 @@ import {
   TextField,
   Button,
   InputAdornment,
+  FormHelperText
 } from "@material-ui/core";
 const Login = () => {
   const [UserName, setUserName] = useState("");
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  let emailHandler = (event) => {
+    if (validation.email(event)) {
+      setUserName(event.target.value)
+      setEmailError("")
+    } else {
+      setEmailError("Invalid Email")
+    }
+  };
+
+  let passwordHandler = (event) => {
+    if (validation.password(event)) {
+      setPassword(event.target.value)
+      setPasswordError("")
+    } else {
+      setPasswordError("Invalid Password")
+    }
+  };
 
   return (
     <Grid>
@@ -45,8 +65,12 @@ const Login = () => {
                       <InputAdornment position="end">@gmail.com</InputAdornment>
                     ),
                   }}
+                  onChange = {(event)=>emailHandler(event)}
                   required
                 />
+                 <FormHelperText style={{ marginLeft: "60px ", color: "red" }}>
+                 {emailError}
+                  </FormHelperText>
               </Grid>
               <Grid>
                 <TextField
@@ -58,10 +82,13 @@ const Login = () => {
                     width: "110%",
                     marginLeft: "55px",
                     marginTop: "10px",
-                    marginBottom: "10px",
                   }}
+                  onChange = {(event)=>passwordHandler(event)}
                   required
                 />
+                <FormHelperText style={{ marginLeft: "60px ", color: "red" }}>
+                 {passwordError}
+                  </FormHelperText>
               </Grid>
               <Link style={{ marginLeft: "55px" }}>Forgot Password?</Link>
             </item>
