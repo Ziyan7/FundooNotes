@@ -1,9 +1,10 @@
-import "../Style/SignUp.css";
-import logo from "../Assets/Images/images.jfif";
+import "../style/signUp.css";
+import logo from "../assets/images/images.jfif";
 import RainbowText from "react-rainbow-text";
 import React, { Component } from "react";
 import * as Routing from "react-router-dom";
-import validation from "../Validation/SignUpValidation";
+import validation from "../config/validation";
+import api from "../service/signUp.service";
 
 import {
   Grid,
@@ -11,7 +12,6 @@ import {
   TextField,
   Link,
   Button,
-  InputAdornment,
   FormHelperText,
 } from "@material-ui/core";
 
@@ -32,12 +32,12 @@ class SignUp extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nameRef = React.createRef();
   }
-  componentDidMount(){
+  componentDidMount() {
     this.nameRef.current.focus();
-    console.log(this.nameRef)
+    console.log(this.nameRef);
   }
   firstHandler = (event) => {
-    if (validation.firstName(event)) {
+    if (validation.firstName(event.target.value)) {
       this.setState({
         firstName: event.target.value,
         nameError: " ",
@@ -49,9 +49,9 @@ class SignUp extends Component {
     }
   };
   lastHandler = (event) => {
-    if (validation.LastName(event)) {
+    if (validation.LastName(event.target.value)) {
       this.setState({
-        firstName: event.target.value,
+        lastName: event.target.value,
         nameError: " ",
       });
     } else {
@@ -62,7 +62,7 @@ class SignUp extends Component {
   };
 
   emailHandler = (event) => {
-    if (validation.email(event)) {
+    if (validation.email(event.target.value)) {
       this.setState({
         email: event.target.value,
         emailError: " ",
@@ -75,7 +75,7 @@ class SignUp extends Component {
   };
 
   passwordHandler = (event) => {
-    if (validation.password(event)) {
+    if (validation.password(event.target.value)) {
       this.setState({
         password: event.target.value,
         passwordError: " ",
@@ -88,7 +88,7 @@ class SignUp extends Component {
   };
 
   confirmHandler = (event) => {
-    if (this.state.password == event.target.value) {
+    if (this.state.password === event.target.value) {
       this.setState({
         confirm: event.target.value,
         confirmError: "",
@@ -101,7 +101,17 @@ class SignUp extends Component {
   };
 
   handleSubmit = () => {
-    alert("Created Account Successfully");
+    // alert("Created Account Successfully");
+    let data = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      password: this.state.password,
+    };
+    api.register(data)
+    .then((data) => console.log(data))
+    .catch((error) =>(console.log("Error")))
+
     this.setState({
       firstName: " ",
       lastName: " ",
@@ -122,127 +132,121 @@ class SignUp extends Component {
           </h3>
           <Grid container spacing={0}>
             <Grid item xs={8}>
-              <item>
-                <Grid>
-                  <TextField
-                    ref = {this.nameRef}
-                    label="First Name"
-                    variant="outlined"
-                    size="small"
-                    style={{
-                      width: "40%",
-                      margin: "10px",
-                      marginBottom: "0px",
-                    }}
-                    onChange={this.firstHandler}
-                    required
-                  />
-                  <TextField
-                    label="Last Name"
-                    variant="outlined"
-                    size="small"
-                    style={{
-                      width: "40%",
-                      margin: "10px",
-                      marginBottom: "0px",
-                    }}
-                    onChange={this.lastHandler}
-                    required
-                  />
-                  <FormHelperText style={{ marginLeft: "12px ", color: "red" }}>
-                    {this.state.nameError}
-                  </FormHelperText>
-                </Grid>
-                <Grid>
-                  <TextField
-                    label="UserName"
-                    variant="outlined"
-                    size="small"
-                    style={{
-                      width: "85%",
-                      margin: "10px",
-                      marginBottom: "0px",
-                    }}
-                    helperText="You can use letters,numbers or periods"
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          @gmail.com
-                        </InputAdornment>
-                      ),
-                    }}
-                    onChange={this.emailHandler}
-                    required
-                  />
-                  <FormHelperText
-                    style={{
-                      margintop: "0px",
-                      marginLeft: "12px ",
-                      color: "red",
-                    }}
-                  >
-                    {this.state.emailError}
-                  </FormHelperText>
-                </Grid>
-                <Grid>
-                  <TextField
-                    label="Password"
-                    variant="outlined"
-                    size="small"
-                    type="password"
-                    style={{ width: "40%", margin: "10px" }}
-                    onChange={this.passwordHandler}
-                    required
-                  />
-                  <TextField
-                    label="Conform"
-                    variant="outlined"
-                    size="small"
-                    type="password"
-                    style={{ width: "40%", margin: "10px" }}
-                    onChange={this.confirmHandler}
-                    required 
-                  />
-                  <FormHelperText
-                    style={{
-                      margintop: "0px",
-                      marginLeft: "12px ",
-                      color: "red",
-                    }}
-                  >
-                    {this.state.passwordError} 
-                    {this.state.confirmError}
-                  </FormHelperText>
-                  <FormHelperText
-                    style={{ marginLeft: "12px ", margintop: "0px" }}
-                  >
-                    Use 8 or more characters with a mix of letters, numbers &
-                    symbols
-                  </FormHelperText>
-                </Grid>
-                <Grid style={{ marginTop: "40px" }}>
-                  <Link
-                    component={Routing.Link}
-                    to="/login"
-                    style={{ marginRight: "187px ", marginLeft: "10px " }}
-                  >
-                    Sign in instead
-                  </Link>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    onClick={this.handleSubmit}
-                  >
-                    Create
-                  </Button>
-                </Grid>
-              </item>
+              <Grid>
+                <TextField
+                  ref={this.nameRef}
+                  label="First Name"
+                  variant="outlined"
+                  size="small"
+                  style={{
+                    width: "40%",
+                    margin: "10px",
+                    marginBottom: "0px",
+                  }}
+                  onChange={this.firstHandler}
+                  required
+                />
+                <TextField
+                  label="Last Name"
+                  variant="outlined"
+                  size="small"
+                  style={{
+                    width: "40%",
+                    margin: "10px",
+                    marginBottom: "0px",
+                  }}
+                  onChange={this.lastHandler}
+                  required
+                />
+                <FormHelperText style={{ marginLeft: "12px ", color: "red" }}>
+                  {this.state.nameError}
+                </FormHelperText>
+              </Grid>
+              <Grid>
+                <TextField
+                  label="Email"
+                  variant="outlined"
+                  size="small"
+                  style={{
+                    width: "85%",
+                    margin: "10px",
+                    marginBottom: "0px",
+                  }}
+                  helperText="You can use letters,numbers or periods"
+                  // InputProps={{
+                  //   endAdornment: (
+                  //     <InputAdornment position="end">@gmail.com</InputAdornment>
+                  //   ),
+                  // }}
+                  onChange={this.emailHandler}
+                  required
+                />
+                <FormHelperText
+                  style={{
+                    margintop: "0px",
+                    marginLeft: "12px ",
+                    color: "red",
+                  }}
+                >
+                  {this.state.emailError}
+                </FormHelperText>
+              </Grid>
+              <Grid>
+                <TextField
+                  label="Password"
+                  variant="outlined"
+                  size="small"
+                  type="password"
+                  style={{ width: "40%", margin: "10px" }}
+                  onChange={this.passwordHandler}
+                  required
+                />
+                <TextField
+                  label="Conform"
+                  variant="outlined"
+                  size="small"
+                  type="password"
+                  style={{ width: "40%", margin: "10px" }}
+                  onChange={this.confirmHandler}
+                  required
+                />
+                <FormHelperText
+                  style={{
+                    margintop: "0px",
+                    marginLeft: "12px ",
+                    color: "red",
+                  }}
+                >
+                  {this.state.passwordError}
+                  {this.state.confirmError}
+                </FormHelperText>
+                <FormHelperText
+                  style={{ marginLeft: "12px ", margintop: "0px" }}
+                >
+                  Use 8 or more characters with a mix of letters, numbers &
+                  symbols
+                </FormHelperText>
+              </Grid>
+              <Grid style={{ marginTop: "40px" }}>
+                <Link
+                  component={Routing.Link}
+                  to="/login"
+                  style={{ marginRight: "187px ", marginLeft: "10px " }}
+                >
+                  Sign in instead
+                </Link>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleSubmit}
+                >
+                  Create
+                </Button>
+              </Grid>
             </Grid>
             <Grid item xs={2}>
-              <item>
-                <img src={logo} style={{ width: "200%" }} alt="Loading" />
-              </item>
+              <img src={logo} style={{ width: "200%" }} alt="Loading" />
             </Grid>
           </Grid>
         </Paper>
