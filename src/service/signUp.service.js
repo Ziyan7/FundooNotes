@@ -2,7 +2,7 @@ import axiosService from "../helper/signUpApi";
 import config from "../config/local";
 
 const register = (data) => {
-  let reqObj = {
+  let regObj = {
     method: "post",
     url: config.url + "/user",
     headers: {
@@ -11,7 +11,7 @@ const register = (data) => {
     data: data,
   };
   return axiosService
-    .post(reqObj)
+    .post(regObj)
     .then((data) => {
       return data;
     })
@@ -20,7 +20,7 @@ const register = (data) => {
     });
 };
 const login = (data) => {
-  let reqObj = {
+  let loginObj = {
     method: "post",
     url: config.url + "/user/login",
     headers: {
@@ -29,7 +29,7 @@ const login = (data) => {
     data: data,
   };
   return axiosService
-    .post(reqObj)
+    .post(loginObj)
     .then((data) => {
       return data;
     })
@@ -37,5 +37,5 @@ const login = (data) => {
       throw error;
     });
 };
-/*eslint import/no-anonymous-default-export: [2, {"allowObject": true}]*/ 
+/*eslint import/no-anonymous-default-export: [2, {"allowObject": true}]*/
 export default { register, login };

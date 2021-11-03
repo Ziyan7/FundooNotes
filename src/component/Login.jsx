@@ -1,4 +1,4 @@
-import "../style/signIn.css"
+import "../style/signIn.css";
 import RainbowText from "react-rainbow-text";
 import * as Routing from "react-router-dom";
 import React, { useState } from "react";
@@ -46,6 +46,21 @@ const Login = () => {
       .then((data) => console.log(data))
       .catch((error) => console.log("Error"));
   };
+  
+  let headingStyle = {
+    marginTop: "10px",
+    textAlign: "center",
+  };
+  let textStyle = {
+    width: "110%",
+    marginLeft: "55px",
+    marginTop: "10px",
+  };
+
+  let helperStyle ={
+    marginLeft: "60px ", 
+    color: "red"
+  };
 
   return (
     <Grid>
@@ -53,26 +68,21 @@ const Login = () => {
         <h2 style={{ marginTop: "60px", textAlign: "center" }}>
           <RainbowText>FundooNotes</RainbowText>
         </h2>
-        <h2 style={{ marginTop: "10px", textAlign: "center" }}>Sign in</h2>
-        <h3 style={{ marginTop: "10px", textAlign: "center" }}>
-          Use your FundooNotes Account
-        </h3>
+        <h2 style={headingStyle}>Sign in</h2>
+        <h3 style={headingStyle}>Use your FundooNotes Account</h3>
         <Grid container spacing={0}>
           <Grid item xs={8}>
             <Grid>
               <TextField
+                autoFocus
                 label="Email Id"
                 variant="outlined"
                 size="small"
-                style={{
-                  width: "110%",
-                  marginLeft: "55px",
-                  marginTop: "10px",
-                }}
+                style={textStyle}
                 onChange={(event) => emailHandler(event)}
                 required
               />
-              <FormHelperText style={{ marginLeft: "60px ", color: "red" }}>
+              <FormHelperText style={helperStyle}>
                 {emailError}
               </FormHelperText>
             </Grid>
@@ -82,26 +92,22 @@ const Login = () => {
                 variant="outlined"
                 size="small"
                 type="password"
-                style={{
-                  width: "110%",
-                  marginLeft: "55px",
-                  marginTop: "10px",
-                }}
+                style={textStyle}
                 onChange={(event) => passwordHandler(event)}
                 required
               />
-              <FormHelperText style={{ marginLeft: "60px ", color: "red" }}>
+              <FormHelperText style={helperStyle}>
                 {passwordError}
               </FormHelperText>
             </Grid>
-            <Link style={{ marginLeft: "55px" }}>Forgot Password?</Link>
+            <Link style={{ paddingLeft: "55px" }}>Forgot Password?</Link>
           </Grid>
-          <Grid style={{ marginTop: "40px" }}>
+          <Grid style={{ paddingTop: "40px" }}>
             <Link
               component={Routing.Link}
               to="/"
               fontSize="10px"
-              style={{ marginLeft: "55px ", marginRight: "85px " }}
+              style={{ paddingLeft: "55px ", paddingRight: "85px " }}
             >
               Create an Account
             </Link>

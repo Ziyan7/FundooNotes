@@ -30,87 +30,76 @@ class SignUp extends Component {
       confirmError: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.nameRef = React.createRef();
-  }
-  componentDidMount() {
-    this.nameRef.current.focus();
-    console.log(this.nameRef);
   }
   firstHandler = (event) => {
-    if (validation.firstName(event.target.value)) {
-      this.setState({
-        firstName: event.target.value,
-        nameError: " ",
-      });
-    } else {
-      this.setState({
-        nameError: "First letter of the name must be in uppercase ",
-      });
-    }
+    validation.firstName(event.target.value)
+      ? this.setState({
+          firstName: event.target.value,
+          nameError: " ",
+        })
+      : this.setState({
+          nameError: "First letter of the name must be in uppercase ",
+        });
   };
   lastHandler = (event) => {
-    if (validation.LastName(event.target.value)) {
-      this.setState({
-        lastName: event.target.value,
-        nameError: " ",
-      });
-    } else {
-      this.setState({
-        nameError: "First letter of the name must be in uppercase ",
-      });
-    }
+    validation.LastName(event.target.value)
+      ? this.setState({
+          lastName: event.target.value,
+          nameError: " ",
+        })
+      : this.setState({
+          nameError: "First letter of the name must be in uppercase ",
+        });
   };
 
   emailHandler = (event) => {
-    if (validation.email(event.target.value)) {
-      this.setState({
-        email: event.target.value,
-        emailError: " ",
-      });
-    } else {
-      this.setState({
-        emailError: "Enter a valid email ID",
-      });
-    }
+    validation.email(event.target.value)
+      ? this.setState({
+          email: event.target.value,
+          emailError: " ",
+        })
+      : this.setState({
+          emailError: "Enter a valid email ID",
+        });
   };
 
   passwordHandler = (event) => {
-    if (validation.password(event.target.value)) {
-      this.setState({
-        password: event.target.value,
-        passwordError: " ",
-      });
-    } else {
-      this.setState({
-        passwordError: "Invalid Password ",
-      });
-    }
+    validation.password(event.target.value)
+      ? this.setState({
+          password: event.target.value,
+          passwordError: " ",
+        })
+      : this.setState({
+          passwordError: "Invalid Password ",
+        });
   };
 
   confirmHandler = (event) => {
-    if (this.state.password === event.target.value) {
-      this.setState({
-        confirm: event.target.value,
-        confirmError: "",
-      });
-    } else {
-      this.setState({
-        confirmError: "Password Missmatch ",
-      });
-    }
+    this.state.password === event.target.value
+      ? this.setState({
+          confirm: event.target.value,
+          confirmError: "",
+        })
+      : this.setState({
+          confirmError: "Password Missmatch ",
+        });
   };
 
   handleSubmit = () => {
-    // alert("Created Account Successfully");
     let data = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
       password: this.state.password,
     };
-    api.register(data)
-    .then((data) => console.log(data))
-    .catch((error) =>(console.log("Error")))
+    api
+      .register(data)
+      .then((data) => {
+        alert("Created Account Successfully");
+      })
+      .catch((error) => {
+        alert("Account creation Failed");
+      });
 
     this.setState({
       firstName: " ",
@@ -120,6 +109,29 @@ class SignUp extends Component {
       confirm: " ",
     });
   };
+
+  nameStyle = {
+    width: "40%",
+    margin: "10px",
+    marginBottom: "0px",
+  };
+
+  emailStyle = {
+    width: "85%",
+    margin: "10px",
+    marginBottom: "0px",
+  };
+
+  helperStyle = {
+    marginLeft: "12px ",
+    color: "red",
+  };
+  
+  passwordStyle = {
+    width: "40%",
+    margin: "10px",
+  };
+
   render() {
     return (
       <Grid>
@@ -134,15 +146,12 @@ class SignUp extends Component {
             <Grid item xs={8}>
               <Grid>
                 <TextField
-                  ref={this.nameRef}
+                  autoFocus
+                  type="input"
                   label="First Name"
                   variant="outlined"
                   size="small"
-                  style={{
-                    width: "40%",
-                    margin: "10px",
-                    marginBottom: "0px",
-                  }}
+                  style={this.nameStyle}
                   onChange={this.firstHandler}
                   required
                 />
@@ -150,44 +159,26 @@ class SignUp extends Component {
                   label="Last Name"
                   variant="outlined"
                   size="small"
-                  style={{
-                    width: "40%",
-                    margin: "10px",
-                    marginBottom: "0px",
-                  }}
+                  style={this.nameStyle}
                   onChange={this.lastHandler}
                   required
                 />
-                <FormHelperText style={{ marginLeft: "12px ", color: "red" }}>
+                <FormHelperText style={this.helperStyle}>
                   {this.state.nameError}
                 </FormHelperText>
               </Grid>
               <Grid>
                 <TextField
+                  placeholder="name@gmail.com"
                   label="Email"
                   variant="outlined"
                   size="small"
-                  style={{
-                    width: "85%",
-                    margin: "10px",
-                    marginBottom: "0px",
-                  }}
+                  style={this.emailStyle}
                   helperText="You can use letters,numbers or periods"
-                  // InputProps={{
-                  //   endAdornment: (
-                  //     <InputAdornment position="end">@gmail.com</InputAdornment>
-                  //   ),
-                  // }}
                   onChange={this.emailHandler}
                   required
                 />
-                <FormHelperText
-                  style={{
-                    margintop: "0px",
-                    marginLeft: "12px ",
-                    color: "red",
-                  }}
-                >
+                <FormHelperText style={this.helperStyle}>
                   {this.state.emailError}
                 </FormHelperText>
               </Grid>
@@ -197,7 +188,7 @@ class SignUp extends Component {
                   variant="outlined"
                   size="small"
                   type="password"
-                  style={{ width: "40%", margin: "10px" }}
+                  style={this.passwordStyle}
                   onChange={this.passwordHandler}
                   required
                 />
@@ -206,32 +197,24 @@ class SignUp extends Component {
                   variant="outlined"
                   size="small"
                   type="password"
-                  style={{ width: "40%", margin: "10px" }}
+                  style={this.passwordStyle}
                   onChange={this.confirmHandler}
                   required
                 />
-                <FormHelperText
-                  style={{
-                    margintop: "0px",
-                    marginLeft: "12px ",
-                    color: "red",
-                  }}
-                >
-                  {this.state.passwordError}
-                  {this.state.confirmError}
-                </FormHelperText>
-                <FormHelperText
-                  style={{ marginLeft: "12px ", margintop: "0px" }}
-                >
+                <FormHelperText style={{ paddingLeft: "12px " }}>
                   Use 8 or more characters with a mix of letters, numbers &
                   symbols
                 </FormHelperText>
+                <FormHelperText style={this.helperStyle}>
+                  {this.state.passwordError}
+                  {this.state.confirmError}
+                </FormHelperText>
               </Grid>
-              <Grid style={{ marginTop: "40px" }}>
+              <Grid style={{ paddingTop: "40px" }}>
                 <Link
                   component={Routing.Link}
                   to="/login"
-                  style={{ marginRight: "187px ", marginLeft: "10px " }}
+                  style={{ paddingRight: "187px ", marginLeft: "10px " }}
                 >
                   Sign in instead
                 </Link>
