@@ -110,36 +110,44 @@ class SignUp extends Component {
     });
   };
 
+  textStyle = {
+    marginLeft: "10px", 
+    fontFamily : "roboto"
+  }
   nameStyle = {
     width: "40%",
     margin: "10px",
     marginBottom: "0px",
+    fontFamily : "roboto"
   };
 
   emailStyle = {
     width: "85%",
     margin: "10px",
     marginBottom: "0px",
+    fontFamily : "roboto"
   };
 
   helperStyle = {
     marginLeft: "12px ",
     color: "red",
+    fontFamily : "roboto"
   };
-  
+
   passwordStyle = {
     width: "40%",
     margin: "10px",
+    fontFamily : "roboto"
   };
 
   render() {
     return (
       <Grid>
         <Paper className="paperStyle">
-          <h1 style={{ marginLeft: "10px" }}>
-            <RainbowText>FundooNotes</RainbowText>
+          <h1 style={this.textStyle}>
+            <RainbowText >FundooNotes</RainbowText>
           </h1>
-          <h3 style={{ marginLeft: "10px" }}>
+          <h3 style={this.textStyle}>
             Create your FundooNotes Account
           </h3>
           <Grid container spacing={0}>
@@ -210,11 +218,11 @@ class SignUp extends Component {
                   {this.state.confirmError}
                 </FormHelperText>
               </Grid>
-              <Grid style={{ paddingTop: "40px" }}>
+              <Grid style={{ paddingTop: "10%" }}>
                 <Link
                   component={Routing.Link}
                   to="/login"
-                  style={{ paddingRight: "187px ", marginLeft: "10px " }}
+                  style={{ paddingRight: "40% ", marginLeft: "10px " }}
                 >
                   Sign in instead
                 </Link>

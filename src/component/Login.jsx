@@ -47,29 +47,37 @@ const Login = () => {
       .catch((error) => console.log("Error"));
   };
   
-  let headingStyle = {
+  let headerStyle = {
+    marginTop: "60px", 
+    textAlign: "center" ,
+    fontFamily : "roboto",
+  };
+  let subHeaderStyle = {
     marginTop: "10px",
     textAlign: "center",
+    fontFamily : "roboto",
   };
   let textStyle = {
     width: "110%",
     marginLeft: "55px",
     marginTop: "10px",
+    fontFamily : "roboto"
   };
 
   let helperStyle ={
     marginLeft: "60px ", 
-    color: "red"
+    color: "red",
+    fontFamily : "roboto"
   };
-
+  
   return (
     <Grid>
       <Paper className="loginStyle">
-        <h2 style={{ marginTop: "60px", textAlign: "center" }}>
+        <h2 style={headerStyle}>
           <RainbowText>FundooNotes</RainbowText>
         </h2>
-        <h2 style={headingStyle}>Sign in</h2>
-        <h3 style={headingStyle}>Use your FundooNotes Account</h3>
+        <h2 style={subHeaderStyle}>Sign in</h2>
+        <h3 style={subHeaderStyle}>Use your FundooNotes Account</h3>
         <Grid container spacing={0}>
           <Grid item xs={8}>
             <Grid>
@@ -102,11 +110,10 @@ const Login = () => {
             </Grid>
             <Link style={{ paddingLeft: "55px" }}>Forgot Password?</Link>
           </Grid>
-          <Grid style={{ paddingTop: "40px" }}>
+          <Grid style={{ paddingTop: "10%" }}>
             <Link
               component={Routing.Link}
               to="/"
-              fontSize="10px"
               style={{ paddingLeft: "55px ", paddingRight: "85px " }}
             >
               Create an Account
