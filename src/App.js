@@ -1,16 +1,18 @@
 import "./App.css";
 import Login from "./component/Login";
 import SignUp from "./component/SignUp";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ForgotPassword from "./component/ForgotPassword";
+import ResetPassword from "./component/ResetPassword";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route path="/" exact component={SignUp} />
-          <Route path="/login" exact component={Login} />
-        </Switch>
+        <Route path="/" exact component={SignUp} />
+        <Route path="/login" component={Login} />
+        <Route path="/forgotpassword" exact component={ForgotPassword} />
+        <Route path="/reset/:token" exact component={ResetPassword} />
       </Router>
     </div>
   );

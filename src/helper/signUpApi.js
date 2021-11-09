@@ -7,13 +7,10 @@ let post = (data) =>{
     data: data.data
   }).then((data)=> {
     console.log(data)
-    if(data.data.status !== 200){
-      throw new Error("Account Creation Failed");
-    };
     return data}
     )
   .catch((error)=>{throw error})
 };
 /*eslint import/no-anonymous-default-export: [2, {"allowObject": true}]*/ 
 
-export default {post,};
+export default {post};

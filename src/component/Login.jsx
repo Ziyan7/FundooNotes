@@ -44,32 +44,35 @@ const Login = () => {
     api
       .login(data)
       .then((data) => console.log(data))
-      .catch((error) => console.log("Error"));
+      .catch((error) => {
+        console.log(error);
+        alert("Login Failed");
+      });
   };
-  
+
   let headerStyle = {
-    marginTop: "60px", 
-    textAlign: "center" ,
-    fontFamily : "roboto",
+    marginTop: "60px",
+    textAlign: "center",
+    fontFamily: "roboto",
   };
   let subHeaderStyle = {
     marginTop: "10px",
     textAlign: "center",
-    fontFamily : "roboto",
+    fontFamily: "roboto",
   };
   let textStyle = {
     width: "110%",
     marginLeft: "55px",
     marginTop: "10px",
-    fontFamily : "roboto"
+    fontFamily: "roboto",
   };
 
-  let helperStyle ={
-    marginLeft: "60px ", 
+  let helperStyle = {
+    marginLeft: "60px ",
     color: "red",
-    fontFamily : "roboto"
+    fontFamily: "roboto",
   };
-  
+
   return (
     <Grid>
       <Paper className="loginStyle">
@@ -90,9 +93,7 @@ const Login = () => {
                 onChange={(event) => emailHandler(event)}
                 required
               />
-              <FormHelperText style={helperStyle}>
-                {emailError}
-              </FormHelperText>
+              <FormHelperText style={helperStyle}>{emailError}</FormHelperText>
             </Grid>
             <Grid>
               <TextField
@@ -108,7 +109,13 @@ const Login = () => {
                 {passwordError}
               </FormHelperText>
             </Grid>
-            <Link style={{ paddingLeft: "55px" }}>Forgot Password?</Link>
+            <Link
+              component={Routing.Link}
+              to="/forgotpassword"
+              style={{ paddingLeft: "55px" }}
+            >
+              Forgot Password?
+            </Link>
           </Grid>
           <Grid style={{ paddingTop: "10%" }}>
             <Link
