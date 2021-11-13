@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-//import userService from "../service/userService";
 import { Grid, TextField, Typography, Button, Paper, FormHelperText } from "@material-ui/core";
 import * as Routing from "react-router-dom";
 import "../style/forgotpassword.css";
 import validation from "../config/validation";
-import api from "../service/signUp.service";
+import {forgetPassword} from "../service/signUp.service";
 
 const ForgotPassWord = () => {
     const [UserName, setUserName] = useState("");
@@ -24,8 +23,8 @@ const ForgotPassWord = () => {
         let data = {
         email: UserName,
         };
-        api
-        .forgetPassword(data)
+
+        forgetPassword(data)
         .then((result) => {
         console.log("Email sent successfully");
         alert("Email has been sent");
@@ -35,24 +34,22 @@ const ForgotPassWord = () => {
         console.log(error);
         });      
       };
-    
-
   
   let inputStyle = {
-    marginLeft: "3%",
+    textAlign : "center",
   };
 
   let helperStyle = {
-    marginLeft: "3% ",
+    marginLeft: "15% ",
     color: "red",
   };
 
   return (
-    <form id="forgotpassword-form" onSubmit={haddleSubmit}>
+    <form id="forgotpassword-form" >
       <Paper elevation={3} >
         <Grid container spacing={4}>
           <Grid item xs={12}>
-            <Typography style={inputStyle} variant="h5">
+            <Typography style={inputStyle} variant="h5" >
               Find your Fundoo Note password
             </Typography>
           </Grid>
@@ -63,7 +60,7 @@ const ForgotPassWord = () => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              style={inputStyle}
+              style={{marginLeft : "15%" , width : "70%"}}
               autoFocus
               label="Email"
               placeholder="name@gmail.com"
@@ -74,12 +71,12 @@ const ForgotPassWord = () => {
             <FormHelperText style={helperStyle}>{emailError}</FormHelperText>
           </Grid>
           <Grid item xs={6} align="left">
-            <Button id="link-btn" component={Routing.Link} to="/login">
+            <Button id="link-btn" component={Routing.Link} to="/login" color = "primary">
               Back
             </Button>
           </Grid>
           <Grid item xs={6} align="right">
-            <Button style = {{marginRight :"5%"}} variant="contained" type="submit">
+            <Button onClick={haddleSubmit} style = {{marginRight :"5%"}} variant="contained" type="submit" color = "primary">
               Submit
             </Button>
           </Grid>

@@ -11,6 +11,20 @@ let post = (data) =>{
     )
   .catch((error)=>{throw error})
 };
+
+let get = (data) =>{
+  return axios({
+    method: data.method,
+    url: data.url,
+    headers: data.headers,
+  }).then((data)=> {
+    console.log(data)
+    return data}
+    )
+  .catch((error)=>{throw error})
+};
+
+
 /*eslint import/no-anonymous-default-export: [2, {"allowObject": true}]*/ 
 
-export default {post};
+export default {post,get};

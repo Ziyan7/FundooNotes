@@ -4,7 +4,7 @@ import RainbowText from "react-rainbow-text";
 import React, { Component } from "react";
 import * as Routing from "react-router-dom";
 import validation from "../config/validation";
-import api from "../service/signUp.service";
+import {register} from "../service/signUp.service";
 
 import {
   Grid,
@@ -92,8 +92,7 @@ class SignUp extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    api
-      .register(data)
+    register(data)
       .then((data) => {
         alert("Created Account Successfully");
       })

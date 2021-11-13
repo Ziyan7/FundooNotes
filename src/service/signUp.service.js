@@ -34,7 +34,7 @@ const login = (data) => {
   return axiosService
     .post(loginObj)
     .then((data) => {
-      if(data.data.status !== 200){
+      if(data.data.status === 500){
         throw new Error("Login Failed");
       };
       return data;
@@ -81,6 +81,25 @@ const resetPassword = (data,token) => {
     .catch((error) => {
       throw error;
     });
+  }
+
+  const userNotes = ()=>{
+    let reqobj = {
+      method: "get",
+      url: config.url + "/notes" ,
+      headers: {
+        "Content-type": "application/json",
+        "Authorization" : "Bearer " + sessionStorage.getItem('token')
+      },
+    }
+    return axiosService.get(reqobj)
+    .then((data) => {
+      // sessionStorage.removeItem('token')
+      return data;
+    })
+    .catch((error) => {
+      throw error;
+    });
 };
-/*eslint import/no-anonymous-default-export: [2, {"allowObject": true}]*/
-export default { register, login , forgetPassword , resetPassword};
+
+export { register, login , forgetPassword , resetPassword, userNotes};

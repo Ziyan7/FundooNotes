@@ -10,13 +10,12 @@ import {
 import { Link, useParams } from "react-router-dom";
 import "../style/forgotpassword.css";
 import validation from "../config/validation";
-import api from "../service/signUp.service";
+import { resetPassword } from "../service/signUp.service";
 
 const ResetPassWord = () => {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const { token } = useParams()
-  
+  const { token } = useParams();
 
   const passwordHandler = (event) => {
     if (validation.password(event.target.value)) {
@@ -32,32 +31,30 @@ const ResetPassWord = () => {
     let data = {
       newPassword: password,
     };
-    console.log(data)
-    console.log(token)
-    api
-    .resetPassword(data, token)
-    .then((result) => {
+    console.log(data);
+    console.log(token);
+    resetPassword(data, token)
+      .then((result) => {
         console.log(result.data);
         alert("Password Changed");
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   let inputStyle = {
-    marginLeft: "3%",
+    textAlign: "center",
   };
 
   let helperStyle = {
-    marginLeft: "3% ",
+    marginLeft: "15% ",
     color: "red",
   };
 
   return (
-    <form id="forgotpassword-form" onSubmit={haddleSubmit}>
-      <Paper elevation={3} >
+    <form id="forgotpassword-form">
+      <Paper elevation={3}>
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <Typography style={inputStyle} variant="h5">
@@ -65,13 +62,13 @@ const ResetPassWord = () => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography style={inputStyle} >
+            <Typography style={inputStyle}>
               Enter your New Fundoo Note password
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <TextField
-              style={inputStyle}
+              style={{ marginLeft: "15%", width: "70%" }}
               autoFocus
               label="Password"
               variant="outlined"
@@ -81,12 +78,18 @@ const ResetPassWord = () => {
             <FormHelperText style={helperStyle}>{passwordError}</FormHelperText>
           </Grid>
           <Grid item xs={6} align="left">
-            <Button id="link-btn" component={Link} to="/login">
+            <Button id="link-btn" component={Link} to="/login" color="primary">
               Back
             </Button>
           </Grid>
           <Grid item xs={6} align="right">
-            <Button style = {{marginRight :"5%"}} variant="contained" type="submit">
+            <Button
+              onClick={haddleSubmit}
+              style={{ marginRight: "5%" }}
+              variant="contained"
+              type="submit"
+              color="primary"
+            >
               Submit
             </Button>
           </Grid>

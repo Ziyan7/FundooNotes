@@ -3,7 +3,7 @@ import RainbowText from "react-rainbow-text";
 import * as Routing from "react-router-dom";
 import React, { useState } from "react";
 import validation from "../config/validation";
-import api from "../service/signUp.service";
+import {login} from "../service/signUp.service";
 import {
   Grid,
   Paper,
@@ -17,6 +17,7 @@ const Login = () => {
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [redirect,setRedirect] = useState(false)
 
   const emailHandler = (event) => {
     if (validation.email(event.target.value)) {
@@ -41,9 +42,12 @@ const Login = () => {
       email: UserName,
       password: password,
     };
-    api
-      .login(data)
-      .then((data) => console.log(data))
+    login(data)
+      .then((data) => {
+        console.log(data.data.token)
+        sessionStorage.setItem('token', data.data.token);
+        setRedirect(true);
+      })  
       .catch((error) => {
         console.log(error);
         alert("Login Failed");
@@ -137,6 +141,7 @@ const Login = () => {
           </Grid>
         </Grid>
       </Paper>
+      {redirect ? <Routing.Redirect to="/usernotes"/> : null}
     </Grid>
   );
 };
