@@ -12,6 +12,7 @@ import NoteIcon from "@material-ui/icons/Note";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import ArchiveIcon from '@material-ui/icons/Archive';
 
 const drawerWidth = 170;
 const openedMixin = (theme) => ({
@@ -94,6 +95,15 @@ function DrawerBar({ open, openDrawer }) {
             />
           </ListItemIcon>
           <ListItemText primary="Edit Notes" />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <ArchiveIcon
+              onMouseOver={() => openDrawer()}
+              onMouseOut={() => openDrawer()}
+            />
+          </ListItemIcon>
+          <ListItemText primary="Archive" />
         </ListItem>
         <ListItem>
           <ListItemIcon>

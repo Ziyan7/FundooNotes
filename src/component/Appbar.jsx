@@ -7,13 +7,18 @@ import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@mui/material/IconButton";
 import logo from "../assets/images/download.jfif";
 import SettingsIcon from "@material-ui/icons/Settings";
-import ViewListIcon from "@material-ui/icons/ViewList";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AppsIcon from '@material-ui/icons/Apps';
+import ViewStreamIcon from '@material-ui/icons/ViewStream';
+import RefreshIcon from '@material-ui/icons/Refresh';
 
 const Topbar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
 }));
+
+const iconStyle = {
+  marginLeft: "20px"
+}
 
 const Appbar = ({ openDrawer }) => {
   return (
@@ -51,10 +56,11 @@ const Appbar = ({ openDrawer }) => {
                 style: { color: "black" },
               }}
             />
-            <SettingsIcon style={{ marginLeft: "3%" }} />
-            <ViewListIcon style={{ marginLeft: "25px" }} />
-            <AppsIcon style={{ marginLeft: "25px" }} />
-            <AccountCircleIcon style={{ marginLeft: "25px" ,fontSize : "45px"}} />
+            <RefreshIcon style={{ marginLeft: "1%" }} />
+            <ViewStreamIcon style={iconStyle} />
+            <SettingsIcon style={iconStyle} />
+            <AppsIcon style={{ marginLeft: "2%"}} />
+            <AccountCircleIcon style={{ marginLeft: "10px" ,fontSize : "45px"}} />
           </Toolbar>
         </Paper>
       </Grid>
