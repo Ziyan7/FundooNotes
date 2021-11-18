@@ -5,9 +5,8 @@ let post = (data) =>{
     url: data.url,
     headers: data.headers,
     data: data.data
-  }).then((data)=> {
-    console.log(data)
-    return data}
+  }).then((response)=> {
+    return response.data}
     )
   .catch((error)=>{throw error})
 };
@@ -18,13 +17,9 @@ let get = (data) =>{
     url: data.url,
     headers: data.headers,
   }).then((data)=> {
-    console.log(data)
     return data}
     )
   .catch((error)=>{throw error})
 };
-
-
-/*eslint import/no-anonymous-default-export: [2, {"allowObject": true}]*/ 
 
 export default {post,get};

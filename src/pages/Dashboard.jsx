@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/material";
 import AppBar from "../component/Appbar.jsx";
 import Notes from "../component/Notes";
 import DrawerBar from "../component/Drawer";
+import { useDispatch } from "react-redux";
+import { setAllNotes } from "../redux/action/index.js";
+import { userNotes } from "../service/signUp.service";
+
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -13,7 +17,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-export default function MiniDrawer() {
+const Dashboard = () => {
   const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -21,6 +25,17 @@ export default function MiniDrawer() {
       return !prev;
     });
   };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    userNotes()
+      .then((response) => {
+        dispatch(setAllNotes(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+        // alert("No Available Notes");
+      });
+  }, [dispatch]);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -28,8 +43,9 @@ export default function MiniDrawer() {
       <AppBar openDrawer={handleDrawerOpen}  />
       <Box sx={{ flexGrow:1, p: 4 }}>
         <DrawerHeader/>
-        <Notes/>
+        <Notes />
       </Box>
     </Box>
   );
 }
+export default  Dashboard;

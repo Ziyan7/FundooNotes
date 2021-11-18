@@ -1,28 +1,15 @@
 import NotesCard from "./NotesCard.jsx";
-import { userNotes } from "../service/signUp.service";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Grid } from "@mui/material";
+import { useSelector } from 'react-redux'
 
 const Notes = () => {
-  const [notes, setNotes] = useState([]);
-
-  useEffect(() => {
-    userNotes()
-    .then((response) => {
-        console.log(response.data)
-    setNotes(response.data)
-    })
-    .catch((error) => {
-    console.log(error);
-    alert("No Available Notes");
-    })
-  }, []);
-
+const notes = useSelector((state) => state.allNotes.searchState);
   return (
     <Grid container spacing={3}>
       {notes.map((note) => {
         return (
-          <Grid item >
+          <Grid item>
             <NotesCard note={note} />
           </Grid>
         );

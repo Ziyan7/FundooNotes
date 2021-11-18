@@ -33,13 +33,14 @@ const login = (data) => {
   };
   return axiosService
     .post(loginObj)
-    .then((data) => {
-      if(data.data.status === 500){
-        throw new Error("Login Failed");
+    .then((response) => {
+      if(response.status === 200){
+        return response;
       };
-      return data;
+      //throw new Error("Login Failed");
     })
     .catch((error) => {
+      console.log('catch')
       throw error;
     });
 };

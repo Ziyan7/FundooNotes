@@ -8,7 +8,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import NoteIcon from "@material-ui/icons/Note";
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
@@ -71,7 +71,7 @@ function DrawerBar({ open, openDrawer }) {
       <List>
         <ListItem>
           <ListItemIcon>
-            <NoteIcon
+            <LightbulbIcon
               onMouseOver={() => openDrawer()}
               onMouseOut={() => openDrawer()}
             />

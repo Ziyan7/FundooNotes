@@ -44,13 +44,12 @@ const Login = () => {
     };
     login(data)
       .then((data) => {
-        console.log(data.data.token)
-        sessionStorage.setItem('token', data.data.token);
+        console.log("this a then block")
+        sessionStorage.setItem('token', data.message);
         setRedirect(true);
       })  
       .catch((error) => {
-        console.log(error);
-        alert("Login Failed");
+        console.log("this is a catch block" + error);
       });
   };
 
@@ -76,9 +75,7 @@ const Login = () => {
     color: "red",
     fontFamily: "roboto",
   };
-
- 
-
+  
   return (
     <Grid>
       <Paper className="loginStyle">
@@ -143,7 +140,7 @@ const Login = () => {
           </Grid>
         </Grid>
       </Paper>
-      {redirect ? <Routing.Redirect to="/usernotes"/> : null}
+     {redirect ? <Routing.Redirect to="/usernotes"/> : null}
     </Grid>
   );
 };
