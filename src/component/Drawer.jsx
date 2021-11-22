@@ -8,11 +8,11 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import ArchiveIcon from '@material-ui/icons/Archive';
+import ArchiveIcon from "@material-ui/icons/Archive";
 
 const drawerWidth = 170;
 const openedMixin = (theme) => ({
@@ -62,58 +62,82 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
+const StyledButton = styled(ListItem)`
+  padding-left: 1px;
+  &:hover {
+    background-color: #dcdcdc;
+  }
+  &:active {
+    background-color: #feefc3;
+  }
+`;
 
-function DrawerBar({ open, openDrawer }) {
+function DrawerBar({ open, openDrawer ,handleTitle}) {
   return (
     <Drawer variant="permanent" open={open}>
       <DrawerHeader />
       <Divider />
       <List>
-        <ListItem>
-          <ListItemIcon>
-            <LightbulbIcon
-              onMouseOver={() => openDrawer()}
-              onMouseOut={() => openDrawer()}
-            />
-          </ListItemIcon>
-          <ListItemText primary="Notes" />
-        </ListItem>
-        <ListItem>
-          <ListItemIcon>
-            <NotificationsIcon
-              onMouseOver={() => openDrawer()}
-              onMouseOut={() => openDrawer()}
-            />
-          </ListItemIcon>
-          <ListItemText primary="Reminders" />
-        </ListItem>
-        <ListItem>
-          <ListItemIcon>
-            <EditIcon
-              onMouseOver={() => openDrawer()}
-              onMouseOut={() => openDrawer()}
-            />
-          </ListItemIcon>
-          <ListItemText primary="Edit Notes" />
-        </ListItem>
-        <ListItem>
-          <ListItemIcon>
-            <ArchiveIcon
-              onMouseOver={() => openDrawer()}
-              onMouseOut={() => openDrawer()}
-            />
-          </ListItemIcon>
-          <ListItemText primary="Archive" />
-        </ListItem>
-        <ListItem>
-          <ListItemIcon>
-            <DeleteForeverIcon
-              onMouseOver={() => openDrawer()}
-              onMouseOut={() => openDrawer()}
-            />
-          </ListItemIcon>
-          <ListItemText primary="Trash" />
-        </ListItem>
+        <StyledButton>
+          <ListItem
+            onMouseOver={() => openDrawer()}
+            onMouseOut={() => openDrawer()}
+            onClick={() => handleTitle("Notes")}
+          >
+            <ListItemIcon>
+              <LightbulbIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Notes" />
+          </ListItem>
+        </StyledButton>
+        <StyledButton>
+          <ListItem
+            onMouseOver={() => openDrawer()}
+            onMouseOut={() => openDrawer()}
+            onClick={() => handleTitle("Reminders")}
+          >
+            <ListItemIcon>
+              <NotificationsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Reminders" />
+          </ListItem>
+        </StyledButton>
+        <StyledButton>
+          <ListItem
+            onMouseOver={() => openDrawer()}
+            onMouseOut={() => openDrawer()}
+            onClick={() => handleTitle("Edit Notes")}
+          >
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText primary="Edit Notes" />
+          </ListItem>
+        </StyledButton>
+        <StyledButton>
+          <ListItem
+            onMouseOver={() => openDrawer()}
+            onMouseOut={() => openDrawer()}
+            onClick={() => handleTitle("Archive")}
+          >
+            <ListItemIcon>
+              <ArchiveIcon />
+            </ListItemIcon>
+            <ListItemText primary="Archive" />
+          </ListItem>
+        </StyledButton>
+        <StyledButton>
+          <ListItem
+            onMouseOver={() => openDrawer()}
+            onMouseOut={() => openDrawer()}
+            onClick={() => handleTitle("Trash")}
+          >
+            <ListItemIcon>
+              <DeleteForeverIcon />
+            </ListItemIcon>
+            <ListItemText primary="Trash" />
+          </ListItem>
+        </StyledButton>
       </List>
       <Divider />
     </Drawer>

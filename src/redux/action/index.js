@@ -12,3 +12,10 @@ export const searchNotes = (note) => {
       data: note
     };
   };
+
+  export const setCreateNote = (notes) => {
+    return {
+        type: "SET_CREATE_NOTES",
+        data: notes,
+    }
+}

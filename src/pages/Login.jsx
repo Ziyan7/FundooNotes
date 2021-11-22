@@ -47,6 +47,7 @@ const Login = () => {
         console.log("this a then block")
         sessionStorage.setItem('token', data.message);
         setRedirect(true);
+        console.log("this a then block after redirect")
       })  
       .catch((error) => {
         console.log("this is a catch block" + error);

@@ -37,7 +37,7 @@ const login = (data) => {
       if(response.status === 200){
         return response;
       };
-      //throw new Error("Login Failed");
+      throw new Error("Login Failed");
     })
     .catch((error) => {
       console.log('catch')

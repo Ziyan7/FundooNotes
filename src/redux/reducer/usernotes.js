@@ -15,6 +15,11 @@ const usernotes = (state = initialState, action) => {
         ...state,
         searchState: action.data,
       };
+    case ActionTypes.SET_CREATE_NOTES :
+      return {
+        ...state,
+        noteState: [...state.noteState, action.data],
+      };
     default:
       return state;
   }

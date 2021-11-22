@@ -15,16 +15,17 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { searchNotes } from "../redux/action/index.js";
 import { useSelector } from "react-redux";
+import GridViewIcon from "@mui/icons-material/GridView";
 
 const Topbar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
 }));
 
 const iconStyle = {
-  paddingRight: "20px",
+  paddingRight: "30px",
 };
 
-const Appbar = ({ openDrawer }) => {
+const Appbar = ({ openDrawer, title,handleView,view  }) => {
   const dispatch = useDispatch();
   const notes = useSelector((state) => state.allNotes.noteState);
   console.log(notes);
@@ -43,6 +44,7 @@ const Appbar = ({ openDrawer }) => {
     dispatch(searchNotes(notes));
   }, [notes]);
 
+
   return (
     <Topbar>
       <Grid>
@@ -58,13 +60,15 @@ const Appbar = ({ openDrawer }) => {
             </IconButton>
             <img
               src={logo}
-              style={{ width: "1%", paddingRight: "10px", paddingLeft: "36px" }}
+              style={{ width: "1%", paddingRight: "10px", paddingLeft: "25px" }}
               alt="Loading"
             />
-            <Typography variant="h6">FundooNotes</Typography>
+            <Typography sx={{ width: "5%" }} variant="h6">
+              {title}
+            </Typography>
             <TextField
               placeholder="Search…"
-              style={{ width: "28%", margin: "auto 50px" }}
+              style={{ width: "28%" }}
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -77,10 +81,27 @@ const Appbar = ({ openDrawer }) => {
               onMouse
               onChange={(event) => handleSearch(event)}
             />
-            <Grid container direction={"row"} sx={{ pl: 6 }}>
+            <Grid container direction={"row"} sx={{ pl: 12 }}>
               <Grid>
                 <RefreshIcon style={iconStyle} />
-                <ViewStreamIcon style={iconStyle} />
+
+                {view ? (
+                
+                    <ViewStreamIcon
+                    style={iconStyle}
+                    onClick={() => {
+                      handleView();
+                    }}
+                  />
+                ) : (
+                  <GridViewIcon
+                  style={iconStyle}
+                  onClick={() => {
+                    handleView();
+                  }}
+                  />
+                )}
+
                 <SettingsIcon style={iconStyle} />
               </Grid>
               <Grid sx={{ pl: 6 }}>
