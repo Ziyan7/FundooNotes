@@ -25,7 +25,6 @@ const CreateNotes = ({}) => {
   };
 
   const handleAddNotes = () => {
-    setVisibility(false)
     let data = {
       title: details.title,
       content: details.content,
@@ -34,7 +33,7 @@ const CreateNotes = ({}) => {
 
     setNotes(data)
       .then((response) => {
-        console.log(response)
+        console.log(response);
         dispatch(setCreateNote(response.createdNote));
       })
       .catch((error) => console.log(error));
@@ -44,7 +43,7 @@ const CreateNotes = ({}) => {
     <Grid sx={{ paddingLeft: "25%" }}>
       <Paper
         elevation={5}
-        sx={{ padding: "0px 2% 0px 2%", width: "55%", margin: "2%" }}
+        sx={{ padding: "0px 2% 0px 2%", width: "60%", margin: "2%" }}
       >
         {visible === false ? (
           <InputBase
@@ -89,20 +88,25 @@ const CreateNotes = ({}) => {
                 onChange={handleNoteState}
               />
             </Grid>
-         
-            <Grid item xs={8}>
+
+            <Grid item xs={8} sx={{ pt: "15px" }}>
               <Noteicons />
-              </Grid>
-              <Grid item xs={4} align="right">
-                <Button
-                  onClick={handleAddNotes }
-                  style={{ color: "black" }}
-                >
-                  close
-                </Button>
-              </Grid>
             </Grid>
-     
+            <Grid item xs={4} align="right"  >
+              <Button onClick={handleAddNotes} style={{ color: "black" }}>
+                submit
+              </Button>
+
+              <Button
+                onClick={() => {
+                  setVisibility(false);
+                }}
+                style={{ color: "black" }}
+              >
+                close
+              </Button>
+            </Grid>
+          </Grid>
         )}
       </Paper>
     </Grid>

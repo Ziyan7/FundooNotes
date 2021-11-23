@@ -82,7 +82,7 @@ function DrawerBar({ open, openDrawer ,handleTitle}) {
           <ListItem
             onMouseOver={() => openDrawer()}
             onMouseOut={() => openDrawer()}
-            onClick={() => handleTitle("Notes")}
+            onClick={() => handleTitle("Fundoo Notes")}
           >
             <ListItemIcon>
               <LightbulbIcon/>

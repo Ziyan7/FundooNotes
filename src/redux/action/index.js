@@ -15,7 +15,13 @@ export const searchNotes = (note) => {
 
   export const setCreateNote = (notes) => {
     return {
-        type: "SET_CREATE_NOTES",
+        type: ActionTypes.SET_CREATE_NOTES,
         data: notes,
+    }
+  }
+  export const setUpdate = (note) => {
+    return {
+        type: ActionTypes.SET_UPDATE_NOTE,
+        data: note,
     }
 }

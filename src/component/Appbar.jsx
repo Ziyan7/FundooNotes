@@ -63,12 +63,12 @@ const Appbar = ({ openDrawer, title,handleView,view  }) => {
               style={{ width: "1%", paddingRight: "10px", paddingLeft: "25px" }}
               alt="Loading"
             />
-            <Typography sx={{ width: "5%" }} variant="h6">
+            <Typography sx={{ width: "6%" }} variant="h6">
               {title}
             </Typography>
             <TextField
               placeholder="Search…"
-              style={{ width: "28%" }}
+              style={{ width: "28%" , paddingLeft : "20px" }}
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -84,7 +84,6 @@ const Appbar = ({ openDrawer, title,handleView,view  }) => {
             <Grid container direction={"row"} sx={{ pl: 12 }}>
               <Grid>
                 <RefreshIcon style={iconStyle} />
-
                 {view ? (
                 
                     <ViewStreamIcon

@@ -38,13 +38,13 @@ const Dashboard = () => {
       });
   }, []);
 
-  const [title, setTitle] = useState("Notes");
+  const [title, setTitle] = useState("Fundoo Notes");
   const handleTitle = (title) => {
     setTitle(title);
     console.log(title);
   };
 
-  const [view, setView] = useState("false");
+  const [view, setView] = useState(true);
   const handleView = () => {
     setView((prev) => {
       return !prev;
