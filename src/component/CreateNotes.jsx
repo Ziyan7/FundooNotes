@@ -28,13 +28,13 @@ const CreateNotes = ({}) => {
     let data = {
       title: details.title,
       content: details.content,
+      isTrash : false
     };
     setDetails(noteDetails);
-
     setNotes(data)
       .then((response) => {
         console.log(response);
-        dispatch(setCreateNote(response.createdNote));
+        dispatch(setCreateNote(response.note));
       })
       .catch((error) => console.log(error));
   };

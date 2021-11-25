@@ -5,9 +5,11 @@ import AppBar from "../component/Appbar.jsx";
 import Notes from "../component/Notes";
 import DrawerBar from "../component/Drawer";
 import { useDispatch } from "react-redux";
-import { setAllNotes } from "../redux/action/index.js";
+import { setAllNotes , setTrash } from "../redux/action/index.js";
 import { userNotes } from "../service/signUp.service";
 import CreateNotes from "../component/CreateNotes.jsx";
+import { useSelector } from 'react-redux';
+import TrashBox from "../component/TrashBox.jsx";
 
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -20,6 +22,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
+  const trash = useSelector((state) => state.allNotes.trashState);
+  const [title, setTitle] = useState("Fundoo Notes");
 
   const handleDrawerOpen = () => {
     setOpen((prev) => {
@@ -30,7 +34,10 @@ const Dashboard = () => {
   useEffect(() => {
     userNotes()
       .then((response) => {
-        dispatch(setAllNotes(response.data));
+        console.log("myResponse")
+        console.log(response)
+        dispatch(setAllNotes(response.data.filter(item=> !item.isTrash)));
+        dispatch(setTrash(response.data.filter((item) => item.isTrash)))
       })
       .catch((error) => {
         console.log(error);
@@ -38,7 +45,7 @@ const Dashboard = () => {
       });
   }, []);
 
-  const [title, setTitle] = useState("Fundoo Notes");
+  
   const handleTitle = (title) => {
     setTitle(title);
     console.log(title);
@@ -51,7 +58,6 @@ const Dashboard = () => {
     });
   };
 
- 
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -65,11 +71,11 @@ const Dashboard = () => {
         title={title}
         handleView={handleView}
         view={view}
+        
       />
       <Box sx={{ flexGrow: 1, p: 4 }}>
         <DrawerHeader />
-        <CreateNotes />
-        <Notes view={view} />
+        {trash === "true" ? <TrashBox/> : <> <CreateNotes /> <Notes view={view} /> </> }
       </Box>
     </Box>
   );

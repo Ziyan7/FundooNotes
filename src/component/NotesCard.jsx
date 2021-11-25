@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Grid } from "@mui/material";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import Noteicons from "./Noteicons";
 
-const NotesCard = ({ note ,handlePopup, index}) => {
+const NotesCard = ({ note ,handlePopup, index , handleTrash}) => {
   const [icons, setIcons] = useState(false);
   
   return (
@@ -23,7 +23,8 @@ const NotesCard = ({ note ,handlePopup, index}) => {
         </Typography>
         <Typography sx = {{pb : "20px"}}>{note.content}</Typography>
       </CardContent>
-      {icons ? <Noteicons /> : null}
+      
+      {icons ? <Noteicons handleTrash = {handleTrash} note = {note}/> : null}
       
     </Card>
     

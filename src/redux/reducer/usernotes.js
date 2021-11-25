@@ -2,6 +2,9 @@ import { ActionTypes } from "../constants/actionTypes";
 const initialState = {
   noteState: [],
   searchState: [],
+  trashState: "false",
+  trash: [],
+  pin: [],
 };
 const usernotes = (state = initialState, action) => {
   switch (action.type) {
@@ -22,13 +25,43 @@ const usernotes = (state = initialState, action) => {
       };
     case ActionTypes.SET_UPDATE_NOTE:
       let newNote = [...state.noteState];
-      console.log("zxcvbnm")
+      console.log("zxcvbnm");
       console.log(action.data);
       newNote[action.data.index] = action.data.data;
       return {
         ...state,
         noteState: newNote,
       };
+    case ActionTypes.SET_TRASH_VALUE:
+      return {
+        ...state,
+        trashState: action.data,
+      };
+      case ActionTypes.SET_TRASH_NOTE:
+        return {
+          ...state,
+          trash: action.data,
+        };
+
+        case ActionTypes.ADD_TRASH_NOTE:
+      let updatedNote = state.noteState.filter((note) => note._id !== action.data._id);
+      let updatedTrashNote = [...state.trash];
+      updatedTrashNote.push(action.data);
+      return { ...state, noteState: updatedNote, trash: updatedTrashNote };
+      
+        
+      case ActionTypes.REMOVE_TRASH_NOTE:
+      let updatedTrash = state.trash.filter((note) => note._id !== action.data._id);
+      let updatedNotes = [...state.noteState];
+      updatedNotes.push(action.data);
+      return { ...state, noteState: updatedNotes, trash: updatedTrash };
+
+      case ActionTypes.SET_DELETE_NOTE:
+        let newTrash = state.trash.filter((note) => note._id !== action.data._id);
+        return {
+          ...state,
+          trash: newTrash,
+        };
     default:
       return state;
   }

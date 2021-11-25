@@ -6,16 +6,16 @@ import { styled } from "@mui/material/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@mui/material/IconButton";
 import logo from "../assets/images/download.jfif";
-import SettingsIcon from "@material-ui/icons/Settings";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import SettingsIconOutlinedIcon from "@material-ui/icons/SettingsOutlined";
+import AccountCircleIconOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 import AppsIcon from "@material-ui/icons/Apps";
-import ViewStreamIcon from "@material-ui/icons/ViewStream";
+import ViewAgendaOutlinedIcon from '@mui/icons-material/ViewAgendaOutlined';
 import RefreshIcon from "@material-ui/icons/Refresh";
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { searchNotes } from "../redux/action/index.js";
 import { useSelector } from "react-redux";
-import GridViewIcon from "@mui/icons-material/GridView";
+import GridViewIconOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 
 const Topbar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -86,14 +86,14 @@ const Appbar = ({ openDrawer, title,handleView,view  }) => {
                 <RefreshIcon style={iconStyle} />
                 {view ? (
                 
-                    <ViewStreamIcon
+                    <ViewAgendaOutlinedIcon
                     style={iconStyle}
                     onClick={() => {
                       handleView();
                     }}
                   />
                 ) : (
-                  <GridViewIcon
+                  <GridViewIconOutlinedIcon
                   style={iconStyle}
                   onClick={() => {
                     handleView();
@@ -101,11 +101,11 @@ const Appbar = ({ openDrawer, title,handleView,view  }) => {
                   />
                 )}
 
-                <SettingsIcon style={iconStyle} />
+                <SettingsIconOutlinedIcon style={iconStyle} />
               </Grid>
               <Grid sx={{ pl: 6 }}>
                 <AppsIcon style={iconStyle} />
-                <AccountCircleIcon />
+                <AccountCircleIconOutlinedIcon />
               </Grid>
             </Grid>
           </Toolbar>

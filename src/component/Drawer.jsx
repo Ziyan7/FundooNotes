@@ -8,11 +8,14 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import LightbulbIcon from "@mui/icons-material/Lightbulb";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import ArchiveIcon from "@material-ui/icons/Archive";
+import LightbulbIconOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
+import NotificationsIconOutlinedIcon from "@material-ui/icons/NotificationsOutlined";
+import EditIconOutlinedIcon from "@material-ui/icons/EditOutlined";
+import DeleteForeverIconOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
+import ArchiveIconOutlinedIcon from "@material-ui/icons/ArchiveOutlined";
+
+import { useDispatch } from "react-redux";
+import {  setTrashValue } from "../redux/action/index.js";
 
 const drawerWidth = 170;
 const openedMixin = (theme) => ({
@@ -72,7 +75,9 @@ const StyledButton = styled(ListItem)`
   }
 `;
 
-function DrawerBar({ open, openDrawer ,handleTitle}) {
+function DrawerBar({ open, openDrawer ,handleTitle, handleTrash}) {
+  const dispatch = useDispatch();
+
   return (
     <Drawer variant="permanent" open={open}>
       <DrawerHeader />
@@ -82,10 +87,10 @@ function DrawerBar({ open, openDrawer ,handleTitle}) {
           <ListItem
             onMouseOver={() => openDrawer()}
             onMouseOut={() => openDrawer()}
-            onClick={() => handleTitle("Fundoo Notes")}
+            onClick={() => {handleTitle("Fundoo Notes");dispatch(setTrashValue("false"))}}
           >
             <ListItemIcon>
-              <LightbulbIcon/>
+              <LightbulbIconOutlinedIcon/>
             </ListItemIcon>
             <ListItemText primary="Notes" />
           </ListItem>
@@ -97,7 +102,7 @@ function DrawerBar({ open, openDrawer ,handleTitle}) {
             onClick={() => handleTitle("Reminders")}
           >
             <ListItemIcon>
-              <NotificationsIcon />
+              <NotificationsIconOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Reminders" />
           </ListItem>
@@ -109,7 +114,7 @@ function DrawerBar({ open, openDrawer ,handleTitle}) {
             onClick={() => handleTitle("Edit Notes")}
           >
             <ListItemIcon>
-              <EditIcon />
+              <EditIconOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Edit Notes" />
           </ListItem>
@@ -121,7 +126,7 @@ function DrawerBar({ open, openDrawer ,handleTitle}) {
             onClick={() => handleTitle("Archive")}
           >
             <ListItemIcon>
-              <ArchiveIcon />
+              <ArchiveIconOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Archive" />
           </ListItem>
@@ -130,10 +135,10 @@ function DrawerBar({ open, openDrawer ,handleTitle}) {
           <ListItem
             onMouseOver={() => openDrawer()}
             onMouseOut={() => openDrawer()}
-            onClick={() => handleTitle("Trash")}
-          >
+            onClick={() => { handleTitle("Trash") ; dispatch(setTrashValue("true"))}}
+            >
             <ListItemIcon>
-              <DeleteForeverIcon />
+              <DeleteForeverIconOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Trash" />
           </ListItem>
