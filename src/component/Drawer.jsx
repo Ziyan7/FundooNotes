@@ -75,7 +75,7 @@ const StyledButton = styled(ListItem)`
   }
 `;
 
-function DrawerBar({ open, openDrawer ,handleTitle, handleTrash}) {
+function DrawerBar({ open, openDrawer ,handleTitle}) {
   const dispatch = useDispatch();
 
   return (

@@ -28,7 +28,8 @@ const CreateNotes = ({}) => {
     let data = {
       title: details.title,
       content: details.content,
-      isTrash : false
+      isTrash : false , 
+      color : "white"
     };
     setDetails(noteDetails);
     setNotes(data)

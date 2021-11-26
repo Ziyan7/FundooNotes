@@ -34,8 +34,6 @@ const Dashboard = () => {
   useEffect(() => {
     userNotes()
       .then((response) => {
-        console.log("myResponse")
-        console.log(response)
         dispatch(setAllNotes(response.data.filter(item=> !item.isTrash)));
         dispatch(setTrash(response.data.filter((item) => item.isTrash)))
       })

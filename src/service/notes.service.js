@@ -78,7 +78,26 @@ let setNotes = (data) => {
         throw err
       });
   };
+
+  let setColor = (data, id) => {
+    let reqObj = {
+      method: "put",
+      url: config.url + "/notes/"+ id,
+      headers: {
+        "Content-type": "application/json",
+        "Authorization" : "Bearer " + sessionStorage.getItem('token')
+      },
+      data:data
+    }
+    return axiosService.post(reqObj)
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        throw err
+      });
+  }
   
 
-export {setNotes , updateNote , setTrash , deleteNote}
+export {setNotes , updateNote , setTrash , deleteNote , setColor}
   

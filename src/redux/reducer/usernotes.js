@@ -5,6 +5,7 @@ const initialState = {
   trashState: "false",
   trash: [],
   pin: [],
+  UndoState: (false),
 };
 const usernotes = (state = initialState, action) => {
   switch (action.type) {
@@ -25,8 +26,6 @@ const usernotes = (state = initialState, action) => {
       };
     case ActionTypes.SET_UPDATE_NOTE:
       let newNote = [...state.noteState];
-      console.log("zxcvbnm");
-      console.log(action.data);
       newNote[action.data.index] = action.data.data;
       return {
         ...state,
@@ -62,6 +61,12 @@ const usernotes = (state = initialState, action) => {
           ...state,
           trash: newTrash,
         };
+
+        case ActionTypes.SET_UNDO_STATE:
+      return {
+        ...state,
+        UndoState: action.data,
+      };
     default:
       return state;
   }

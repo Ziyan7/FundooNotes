@@ -58,7 +58,14 @@ export const deleteFromTrash = (note) => {
       type: ActionTypes.SET_DELETE_NOTE,
       data: note,
     };
-}
+};
+
+export const setUndoNote = (value) => {
+  return {
+    type: ActionTypes.SET_UNDO_STATE,
+    data: value,
+  };
+};
 
 
 
