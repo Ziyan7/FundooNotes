@@ -6,9 +6,10 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import { IconButton, Tooltip } from "@mui/material";
 import Circle from "@mui/icons-material/Circle";
 import { useDispatch } from "react-redux";
-import { setUndoNote } from "../redux/action/index";
-import { setColor } from "../service/notes.service";
-const Noteicons = ({ handleTrash, note , setColour}) => {
+import { setUndoNote, setUpdate } from "../redux/action/index";
+import { setColor, updateNote, setImage } from "../service/notes.service";
+
+const Noteicons = ({ handleTrash , note,  index }) => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -24,29 +25,62 @@ const Noteicons = ({ handleTrash, note , setColour}) => {
 
   const iconStyle = {
     width: "17px",
-    // paddingRight : "30%"
+    
+  };
+
+  const handleImage = (imageName) => {
+    let data = {
+      ...note,
+      image: imageName,
+    };
+    console.log("image testing.....")
+    console.log(note)
+    updateNote(data, note._id)
+      .then((res) => {
+        console.log("update problemssssssssssssssssssssss");
+        console.log(res)
+        dispatch(setUpdate({ data: res, index: index }));
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleselectedColour = (noteColor) => {
-    console.log(noteColor)
     let data = {
       ...note,
       color: noteColor,
     };
-    console.log(data.color)
+    
+    console.log(note);
     setColor(data, note._id)
       .then((res) => {
-        setColour(res.color)
+        dispatch(setUpdate({ data: res, index: index }));
       })
       .catch((res) => console.log(res));
   };
+ 
+  const fileHandler = (event) => {
+    console.log(note)
+    const fd = new FormData();
+    fd.append("image", event.target.files[0], event.target.files[0].name);
+    setImage(fd)
+      .then((res) => {
+        console.log(res)
+        console.log("scope test")
+        console.log(note)
+        handleImage(res.filename);
+        console.log("backend");
+        console.log(res.filename);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <Grid
       container
       direction="row"
       justifyContent="space-between"
       spacing={3}
-      sx={{ p: "15px 0 0 30px" }}
+      sx={{ p: "20px 0 5px 30px" }}
     >
       <Tooltip title="Change Color">
         <IconButton size="small">
@@ -54,12 +88,19 @@ const Noteicons = ({ handleTrash, note , setColour}) => {
         </IconButton>
       </Tooltip>
 
-      <Tooltip title="Add image">
-        <IconButton size="small">
-          <ImageIconOutlinedIcon style={iconStyle} />
-        </IconButton>
-      </Tooltip>
-
+      <input
+        style={{ display: "none" }}
+        id="raised-button-file"
+        type="file"
+        onChange={  fileHandler }
+      />
+      <label htmlFor="raised-button-file">
+        <Tooltip title="Upload Image">
+          <IconButton component="span">
+            <ImageIconOutlinedIcon style={iconStyle} />
+          </IconButton>
+        </Tooltip>
+      </label>
       <Tooltip title="Delete">
         <IconButton size="small">
           <DeleteOutlineOutlinedIcon
@@ -73,7 +114,6 @@ const Noteicons = ({ handleTrash, note , setColour}) => {
       </Tooltip>
 
       <Popover
-     
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
@@ -87,12 +127,13 @@ const Noteicons = ({ handleTrash, note , setColour}) => {
         }}
       >
         <Grid container sx={{ p: 1 }}>
-          {["FFFbFB",
+          {[
+            "FFFbFB",
             "#fafcfb",
             "#F28B82",
             "#FBBC05",
             "#FFF475",
-            "	#CCFF90",
+            "#CCFF90",
             "#A7FFEB",
             "#CBF0F8",
             "#AECBFA",

@@ -1,5 +1,14 @@
 import MuiAppBar from "@mui/material/AppBar";
-import { Toolbar, TextField, InputAdornment, Grid, Paper } from "@mui/material";
+import {
+  Toolbar,
+  TextField,
+  InputAdornment,
+  Grid,
+  Paper,
+  Popover,
+  Button,
+  Avatar,
+} from "@mui/material";
 import SearchIcon from "@material-ui/icons/Search";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
@@ -9,13 +18,14 @@ import logo from "../assets/images/download.jfif";
 import SettingsIconOutlinedIcon from "@material-ui/icons/SettingsOutlined";
 import AccountCircleIconOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 import AppsIcon from "@material-ui/icons/Apps";
-import ViewAgendaOutlinedIcon from '@mui/icons-material/ViewAgendaOutlined';
+import ViewAgendaOutlinedIcon from "@mui/icons-material/ViewAgendaOutlined";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { searchNotes } from "../redux/action/index.js";
 import { useSelector } from "react-redux";
 import GridViewIconOutlinedIcon from "@mui/icons-material/GridViewOutlined";
+import { Redirect } from "react-router";
 
 const Topbar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -25,9 +35,22 @@ const iconStyle = {
   paddingRight: "30px",
 };
 
-const Appbar = ({ openDrawer, title,handleView,view  }) => {
+const Appbar = ({ openDrawer, title, handleView, view }) => {
   const dispatch = useDispatch();
   const notes = useSelector((state) => state.allNotes.noteState);
+  const [logout, setLogout] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+
   console.log(notes);
   const handleSearch = (event) => {
     dispatch(
@@ -44,6 +67,10 @@ const Appbar = ({ openDrawer, title,handleView,view  }) => {
     dispatch(searchNotes(notes));
   }, [notes]);
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    setLogout(true);
+  };
 
   return (
     <Topbar>
@@ -68,7 +95,8 @@ const Appbar = ({ openDrawer, title,handleView,view  }) => {
             </Typography>
             <TextField
               placeholder="Search…"
-              style={{ width: "28%" , paddingLeft : "20px" }}
+              id="searchBar"
+              style={{ width: "28%", paddingLeft: "20px" }}
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -82,11 +110,10 @@ const Appbar = ({ openDrawer, title,handleView,view  }) => {
               onChange={(event) => handleSearch(event)}
             />
             <Grid container direction={"row"} sx={{ pl: 12 }}>
-              <Grid>
+              <Grid  >
                 <RefreshIcon style={iconStyle} />
                 {view ? (
-                
-                    <ViewAgendaOutlinedIcon
+                  <ViewAgendaOutlinedIcon
                     style={iconStyle}
                     onClick={() => {
                       handleView();
@@ -94,23 +121,49 @@ const Appbar = ({ openDrawer, title,handleView,view  }) => {
                   />
                 ) : (
                   <GridViewIconOutlinedIcon
-                  style={iconStyle}
-                  onClick={() => {
-                    handleView();
-                  }}
+                    style={iconStyle}
+                    onClick={() => {
+                      handleView();
+                    }}
                   />
                 )}
 
                 <SettingsIconOutlinedIcon style={iconStyle} />
               </Grid>
-              <Grid sx={{ pl: 6 }}>
+              <Grid  sx={{ pl: 6  }} >
+                <Grid container direction={"row"}>
                 <AppsIcon style={iconStyle} />
-                <AccountCircleIconOutlinedIcon />
+                <Avatar
+                  sx={{
+                    bgcolor: "purple",
+                    fontSize: "10px",
+                    width: 28,
+                    height: 28,
+                  }}
+                  onClick={handleClick}
+                >
+                  AZ
+                </Avatar>
+                </Grid>
               </Grid>
             </Grid>
           </Toolbar>
         </Paper>
+        <Popover
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+        >
+          <Grid>
+            <Button onClick={handleLogout}>Logout</Button>
+          </Grid>
+        </Popover>
       </Grid>
+      {logout ? <Redirect to="/login" /> : null}
     </Topbar>
   );
 };

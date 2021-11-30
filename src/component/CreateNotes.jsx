@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { setCreateNote } from "../redux/action";
 import Noteicons from "./Noteicons";
 
-const CreateNotes = ({}) => {
+const CreateNotes = () => {
   const dispatch = useDispatch();
 
   let noteDetails = {
@@ -29,11 +29,13 @@ const CreateNotes = ({}) => {
       title: details.title,
       content: details.content,
       isTrash : false , 
-      color : "white"
+      color : "white",
+      image : ""
     };
     setDetails(noteDetails);
     setNotes(data)
       .then((response) => {
+        console.log("checkinggggg note");
         console.log(response);
         dispatch(setCreateNote(response.note));
       })
@@ -90,7 +92,7 @@ const CreateNotes = ({}) => {
               />
             </Grid>
 
-            <Grid item xs={8} sx={{ pt: "15px" }}>
+            <Grid item xs={8} >
               <Noteicons />
             </Grid>
             <Grid item xs={4} align="right"  >

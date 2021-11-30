@@ -84,7 +84,7 @@ let setNotes = (data) => {
       method: "put",
       url: config.url + "/notes/"+ id,
       headers: {
-        "Content-type": "application/json",
+       
         "Authorization" : "Bearer " + sessionStorage.getItem('token')
       },
       data:data
@@ -98,6 +98,23 @@ let setNotes = (data) => {
       });
   }
   
+  const setImage = (data) => {
+    let reqobj = {
+      method: "post",
+      url: config.url + "/upload-images",
+      headers: {
+        "Authorization" : "Bearer " + sessionStorage.getItem('token')
+      },
+      data: data,
+    };
+    return axiosService.post(reqobj)
+      .then((response) => {
+        return response;
+      })
+      .catch((err) => {
+        throw err;
+      });
+  };
 
-export {setNotes , updateNote , setTrash , deleteNote , setColor}
+export {setNotes , updateNote , setTrash , deleteNote , setColor , setImage}
   

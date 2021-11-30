@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import {
   InputBase,
@@ -40,9 +39,7 @@ import {setUpdate} from "../redux/action"
       handleClose();
       updateNote(data, editNote.note._id)
         .then((res) => { 
-          console.log("hekllllllllllllllllllloooooooooooooooooo");
           console.log(res );
-
           dispatch(setUpdate({data: res, index:editNote.index}));
         })
         .catch((err) => console.log(err.message));
@@ -78,7 +75,7 @@ import {setUpdate} from "../redux/action"
           variant="standard"
           placeholder="Take a note..."
           inputProps={{
-            style: { color: "black", height: "36px" },
+            style: { color: "black", minHeight: "36px" },
             disableUnderline: true,
           }}
           multiline={true}

@@ -13,10 +13,12 @@ const register = (data) => {
   return axiosService
     .post(regObj)
     .then((data) => {
-      if(data.data.status !== 200){
-        throw new Error("Account Creation Failed");
+      console.log(data)
+      if(data.status === 200){
+        return data;
+       
       };
-      return data;
+      throw new Error("Account Creation Failed");
     })
     .catch((error) => {
       throw error;
@@ -56,7 +58,7 @@ const forgetPassword = (data) => {
   };
   return axiosService.post(reqobj)
     .then((data) => {
-      if(data.data.status === 500){
+      if(data.status === 500){
         throw new Error("Invalid Email");
       };
       return data;

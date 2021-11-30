@@ -10,12 +10,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import {  setUndoNote ,removeTrashNote} from "../redux/action";
 
 const Notes = ({view}) => {
+const dispatch = useDispatch();
 const [popup, setPopup] = useState(false);
 const [editNote, setEditedNote] = useState({})
 const notes = useSelector((state) => state.allNotes.searchState);
 const undonote = useSelector((state) => state.allNotes.UndoState);
-const dispatch = useDispatch();
-
 const [undoItem, setUndoItem] = useState(null)
 
 const handlePopup = (note,index) => {
@@ -97,7 +96,7 @@ const action = (
        {popup?<PopUp popup={popup} handleClose={handleClose} editNote={editNote} /> : null}
        <Snackbar
         open={undonote}
-        autoHideDuration={6000}
+        autoHideDuration={5000}
         onClose={handleUndoClose}
         message="Note Deleted"
         action={action}

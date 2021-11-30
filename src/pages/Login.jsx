@@ -94,6 +94,7 @@ const Login = () => {
                 variant="outlined"
                 size="small"
                 style={textStyle}
+                id = "emailId"
                 onChange={(event) => emailHandler(event)}
                 required
               />
@@ -105,6 +106,7 @@ const Login = () => {
                 variant="outlined"
                 size="small"
                 type="password"
+                id = "password"
                 style={textStyle}
                 onChange={(event) => passwordHandler(event)}
                 required
@@ -112,32 +114,39 @@ const Login = () => {
               <FormHelperText style={helperStyle}>
                 {passwordError}
               </FormHelperText>
-            </Grid>
+            </Grid >
+            <Grid style = {{ paddingBottom: "20%" }}>
             <Link
+            
               component={Routing.Link}
               to="/forgotpassword"
               style={{ paddingLeft: "55px" }}
             >
               Forgot Password?
             </Link>
+            </Grid>
           </Grid>
-          <Grid style={{ paddingTop: "10%" }}>
+          <Grid  container spacing={9} justifyContent = "center" >
+          <Grid item xs={6}>
             <Link
               component={Routing.Link}
               to="/"
-              style={{ paddingLeft: "55px ", paddingRight: "85px " }}
+              // style={{ paddingLeft: "55px ", paddingRight: "85px " }}
             >
               Create an Account
             </Link>
-
+            </Grid>
+            <Grid item xs={4} >
             <Button
               type="submit"
               variant="contained"
               color="primary"
+              id = "SignIn-btn"
               onClick={haddleSubmit}
             >
               Sign In
             </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Paper>

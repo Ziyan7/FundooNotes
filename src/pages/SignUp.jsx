@@ -97,7 +97,7 @@ class SignUp extends Component {
         alert("Created Account Successfully");
       })
       .catch((error) => {
-        alert("Account creation Failed");
+        alert(error);
       });
 
     this.setState({
@@ -158,6 +158,7 @@ class SignUp extends Component {
                   label="First Name"
                   variant="outlined"
                   size="small"
+                  id = "firstName"
                   style={this.nameStyle}
                   onChange={this.firstHandler}
                   required
@@ -166,6 +167,7 @@ class SignUp extends Component {
                   label="Last Name"
                   variant="outlined"
                   size="small"
+                  id = "lastName"
                   style={this.nameStyle}
                   onChange={this.lastHandler}
                   required
@@ -180,6 +182,7 @@ class SignUp extends Component {
                   label="Email"
                   variant="outlined"
                   size="small"
+                  id = "email"
                   style={this.emailStyle}
                   helperText="You can use letters,numbers or periods"
                   onChange={this.emailHandler}
@@ -195,6 +198,7 @@ class SignUp extends Component {
                   variant="outlined"
                   size="small"
                   type="password"
+                  id = "password"
                   style={this.passwordStyle}
                   onChange={this.passwordHandler}
                   required
@@ -204,6 +208,7 @@ class SignUp extends Component {
                   variant="outlined"
                   size="small"
                   type="password"
+                  id = "confirm"
                   style={this.passwordStyle}
                   onChange={this.confirmHandler}
                   required
@@ -222,6 +227,7 @@ class SignUp extends Component {
                   component={Routing.Link}
                   to="/login"
                   style={{ paddingRight: "40% ", marginLeft: "10px " }}
+                  id = "login-redirect"
                 >
                   Sign in instead
                 </Link>
@@ -229,7 +235,8 @@ class SignUp extends Component {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  onClick={this.handleSubmit}
+                  onClick={this.handleSubmit} 
+                  id = "signUp-btn"
                 >
                   Create
                 </Button>

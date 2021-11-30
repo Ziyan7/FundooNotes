@@ -5,37 +5,45 @@ const initialState = {
   trashState: "false",
   trash: [],
   pin: [],
-  UndoState: (false),
+  UndoState: false,
 };
 const usernotes = (state = initialState, action) => {
   switch (action.type) {
+
     case ActionTypes.SET_ALL_NOTES:
       return {
         ...state,
         noteState: action.data,
       };
+
     case ActionTypes.SET_SEARCHED_NOTES:
       return {
         ...state,
         searchState: action.data,
       };
+
     case ActionTypes.SET_CREATE_NOTES:
       return {
         ...state,
         noteState: [...state.noteState, action.data],
       };
+
     case ActionTypes.SET_UPDATE_NOTE:
       let newNote = [...state.noteState];
+      
       newNote[action.data.index] = action.data.data;
       return {
+       
         ...state,
         noteState: newNote,
       };
+
     case ActionTypes.SET_TRASH_VALUE:
       return {
         ...state,
         trashState: action.data,
       };
+
       case ActionTypes.SET_TRASH_NOTE:
         return {
           ...state,
@@ -48,7 +56,7 @@ const usernotes = (state = initialState, action) => {
       updatedTrashNote.push(action.data);
       return { ...state, noteState: updatedNote, trash: updatedTrashNote };
       
-        
+
       case ActionTypes.REMOVE_TRASH_NOTE:
       let updatedTrash = state.trash.filter((note) => note._id !== action.data._id);
       let updatedNotes = [...state.noteState];

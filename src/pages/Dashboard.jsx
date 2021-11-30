@@ -10,6 +10,7 @@ import { userNotes } from "../service/signUp.service";
 import CreateNotes from "../component/CreateNotes.jsx";
 import { useSelector } from 'react-redux';
 import TrashBox from "../component/TrashBox.jsx";
+import { Redirect } from "react-router";
 
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -24,6 +25,7 @@ const Dashboard = () => {
   const [open, setOpen] = useState(false);
   const trash = useSelector((state) => state.allNotes.trashState);
   const [title, setTitle] = useState("Fundoo Notes");
+  const token = sessionStorage.getItem("token");
 
   const handleDrawerOpen = () => {
     setOpen((prev) => {
@@ -56,7 +58,9 @@ const Dashboard = () => {
     });
   };
 
-
+  if (token == null) {
+    return <>{<Redirect to="/login" />}</>;
+  } else {
   return (
     <Box sx={{ display: "flex" }}>
       <DrawerBar
@@ -77,5 +81,6 @@ const Dashboard = () => {
       </Box>
     </Box>
   );
+  };
 };
 export default Dashboard;

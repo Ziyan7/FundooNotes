@@ -4,6 +4,7 @@ import * as Routing from "react-router-dom";
 import "../style/forgotpassword.css";
 import validation from "../config/validation";
 import {forgetPassword} from "../service/signUp.service";
+import RainbowText from "react-rainbow-text";
 
 const ForgotPassWord = () => {
     const [UserName, setUserName] = useState("");
@@ -44,9 +45,17 @@ const ForgotPassWord = () => {
     color: "red",
   };
 
+  let headerStyle = {
+    marginTop: "60px",
+    textAlign: "center",
+    fontFamily: "roboto",
+  };
   return (
     <form id="forgotpassword-form" >
       <Paper elevation={3} >
+      <h2 style={headerStyle}>
+          <RainbowText>FundooNotes</RainbowText>
+        </h2>
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <Typography style={inputStyle} variant="h5" >

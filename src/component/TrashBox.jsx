@@ -94,7 +94,7 @@ const TrashBox = () => {
                 onMouseLeave={() => {
                   setIcons(false);
                 }}
-                style = {{minHeight : "150px"}}
+                style = {{minHeight : "150px" }}
               >
                 <CardContent>
                   <Typography sx={{ fontWeight: "bold", fontSize: "22px" }}>
@@ -121,7 +121,7 @@ const TrashBox = () => {
                       </IconButton>
                     </Tooltip>
                   </>
-                ) : null}
+                ) : <div style={{ height: "25px" }}></div>}
               </Card>
             </Grid>
           );
