@@ -1,4 +1,4 @@
-import "../style/signUp.css";
+import "../style/SignUp.css";
 import logo from "../assets/images/images.jfif";
 import RainbowText from "react-rainbow-text";
 import React, { Component } from "react";
@@ -189,7 +189,7 @@ class SignUp extends Component {
                   required
                 />
                 <FormHelperText style={this.helperStyle}>
-                  {this.state.emailError}
+                 {this.state.emailError}
                 </FormHelperText>
               </Grid>
               <Grid>

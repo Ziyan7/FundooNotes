@@ -3,7 +3,6 @@ import { setNotes } from "../service/notes.service";
 import { Paper, Grid, InputBase, Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setCreateNote } from "../redux/action";
-import Noteicons from "./Noteicons";
 
 const CreateNotes = () => {
   const dispatch = useDispatch();
@@ -92,24 +91,19 @@ const CreateNotes = () => {
               />
             </Grid>
 
-            <Grid item xs={8} >
-              <Noteicons />
-            </Grid>
-            <Grid item xs={4} align="right"  >
-              <Button onClick={handleAddNotes} style={{ color: "black" }}>
-                submit
-              </Button>
-
-              <Button
+                <Grid item xs={12} align="right">
+              <Button  
                 onClick={() => {
                   setVisibility(false);
+                  handleAddNotes()
+                 
                 }}
                 style={{ color: "black" }}
               >
                 close
               </Button>
+              </Grid>
             </Grid>
-          </Grid>
         )}
       </Paper>
     </Grid>

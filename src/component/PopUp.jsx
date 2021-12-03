@@ -6,6 +6,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  CardMedia
 } from "@mui/material";
 import {updateNote} from "../service/notes.service";
 import { useDispatch } from "react-redux";
@@ -48,6 +49,12 @@ import {setUpdate} from "../redux/action"
 
   return (
     <Dialog onClose={handleClose} open={popup}>
+       <CardMedia
+            component="img"
+            image={`http://localhost:9000/images/${editNote.note.image}`}
+            alt="image"
+            style={{height : "250px" }}
+          />
       <DialogTitle>
         <InputBase
           variant="standard"

@@ -7,7 +7,7 @@ import { IconButton, Tooltip } from "@mui/material";
 import Circle from "@mui/icons-material/Circle";
 import { useDispatch } from "react-redux";
 import { setUndoNote, setUpdate } from "../redux/action/index";
-import { setColor, updateNote, setImage } from "../service/notes.service";
+import {  updateNote, setImage } from "../service/notes.service";
 
 const Noteicons = ({ handleTrash , note,  index }) => {
   const dispatch = useDispatch();
@@ -33,12 +33,8 @@ const Noteicons = ({ handleTrash , note,  index }) => {
       ...note,
       image: imageName,
     };
-    console.log("image testing.....")
-    console.log(note)
     updateNote(data, note._id)
       .then((res) => {
-        console.log("update problemssssssssssssssssssssss");
-        console.log(res)
         dispatch(setUpdate({ data: res, index: index }));
       })
       .catch((err) => console.log(err));
@@ -51,25 +47,21 @@ const Noteicons = ({ handleTrash , note,  index }) => {
     };
     
     console.log(note);
-    setColor(data, note._id)
+    updateNote(data, note._id)
       .then((res) => {
         dispatch(setUpdate({ data: res, index: index }));
       })
       .catch((res) => console.log(res));
   };
+  
  
-  const fileHandler = (event) => {
+  let fileHandler = (event) => {
     console.log(note)
     const fd = new FormData();
     fd.append("image", event.target.files[0], event.target.files[0].name);
     setImage(fd)
       .then((res) => {
-        console.log(res)
-        console.log("scope test")
-        console.log(note)
         handleImage(res.filename);
-        console.log("backend");
-        console.log(res.filename);
       })
       .catch((err) => console.log(err));
   };
@@ -92,7 +84,7 @@ const Noteicons = ({ handleTrash , note,  index }) => {
         style={{ display: "none" }}
         id="raised-button-file"
         type="file"
-        onChange={  fileHandler }
+        onChange={fileHandler}
       />
       <label htmlFor="raised-button-file">
         <Tooltip title="Upload Image">

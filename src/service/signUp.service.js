@@ -21,6 +21,7 @@ const register = (data) => {
       throw new Error("Account Creation Failed");
     })
     .catch((error) => {
+      console.log(error)
       throw error;
     });
 };

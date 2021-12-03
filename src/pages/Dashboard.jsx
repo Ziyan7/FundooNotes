@@ -75,7 +75,7 @@ const Dashboard = () => {
         view={view}
         
       />
-      <Box sx={{ flexGrow: 1, p: 4 }}>
+      <Box sx={{ flexGrow: 1, p: 4 }} >
         <DrawerHeader />
         {trash === "true" ? <TrashBox/> : <> <CreateNotes /> <Notes view={view} /> </> }
       </Box>

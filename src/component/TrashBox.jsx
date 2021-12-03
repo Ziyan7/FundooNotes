@@ -8,13 +8,14 @@ import {
   DialogTitle,
   Grid,
   Typography,
+  CardMedia
 } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import { setTrash, deleteNote } from "../service/notes.service";
-import { removeTrashNote, deleteFromTrash  } from "../redux/action";
+import { removeTrashNote, deleteFromTrash } from "../redux/action";
 import { IconButton, Tooltip } from "@mui/material";
 
 const TrashBox = () => {
@@ -48,12 +49,12 @@ const TrashBox = () => {
   const handleDeleteAll = () => {
     notes.map((note) => {
       deleteNote(note._id)
-      .then((res) => {
-        dispatch(deleteFromTrash(res.note));
-      })
-      .catch((err) => console.log(err));
-  })
-}
+        .then((res) => {
+          dispatch(deleteFromTrash(res.note));
+        })
+        .catch((err) => console.log(err));
+    });
+  };
 
   const handlePopup = (note, index) => {
     const data = {
@@ -70,33 +71,45 @@ const TrashBox = () => {
 
   return (
     <>
-      <Grid container spacing={0} justifyContent = "center" sx = {{ pb: "15px "}}>
-        <Grid item xs={5} sx = {{ p: "7px 0 0 160px"}} >
-          <Typography    style = {{fontStyle : "italic"}} >
+      <Grid container spacing={0} justifyContent="center" sx={{ pb: "15px " }}>
+        <Grid item xs={5} sx={{ p: "7px 0 0 160px" }}>
+          <Typography style={{ fontStyle: "italic" }}>
             Notes in Trash are deleted after 7 days.
           </Typography>
         </Grid>
-        <Grid item xs={2} >
-          <Button onClick = {() => {handleDeleteAll()}}>Empty Trash</Button>
+        <Grid item xs={2}>
+          <Button
+            onClick={() => {
+              handleDeleteAll();
+            }}
+          >
+            Empty Trash
+          </Button>
         </Grid>
       </Grid>
-
 
       <Grid container spacing={3}>
         {notes.map((note, index) => {
           return (
             <Grid item md={2.5}>
               <Card
-                style={{ height: "130px" }}
                 onMouseOver={() => {
                   setIcons(true);
                 }}
                 onMouseLeave={() => {
                   setIcons(false);
                 }}
-                style = {{minHeight : "150px" }}
+                style={{ minHeight: "150px" , backgroundColor: note.color }}
               >
                 <CardContent>
+                  {note.image !== "" ? (
+                    <CardMedia
+                      component="img"
+                      image={`http://localhost:9000/images/${note.image}`}
+                      alt="image"
+                      style={{ minHeight: "150px", maxHeight: "250px" }}
+                    />
+                  ) : null}
                   <Typography sx={{ fontWeight: "bold", fontSize: "22px" }}>
                     {note.title}
                   </Typography>
@@ -121,7 +134,9 @@ const TrashBox = () => {
                       </IconButton>
                     </Tooltip>
                   </>
-                ) : <div style={{ height: "25px" }}></div>}
+                ) : (
+                  <div style={{ height: "25px" }}></div>
+                )}
               </Card>
             </Grid>
           );
@@ -134,7 +149,6 @@ const TrashBox = () => {
             handleDelete={handleDelete}
           />
         ) : null}
-
       </Grid>
     </>
   );

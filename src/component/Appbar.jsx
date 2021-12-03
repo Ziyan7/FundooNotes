@@ -14,9 +14,8 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@mui/material/IconButton";
-import logo from "../assets/images/download.jfif";
+import logo from "../assets/images/logo.png";
 import SettingsIconOutlinedIcon from "@material-ui/icons/SettingsOutlined";
-import AccountCircleIconOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 import AppsIcon from "@material-ui/icons/Apps";
 import ViewAgendaOutlinedIcon from "@mui/icons-material/ViewAgendaOutlined";
 import RefreshIcon from "@material-ui/icons/Refresh";
@@ -87,21 +86,22 @@ const Appbar = ({ openDrawer, title, handleView, view }) => {
             </IconButton>
             <img
               src={logo}
-              style={{ width: "1%", paddingRight: "10px", paddingLeft: "25px" }}
+              style={{ width: "1.5%" , paddingLeft : "10px"}}
               alt="Loading"
             />
-            <Typography sx={{ width: "6%" }} variant="h6">
+            <Typography sx={{ width: "6%" , paddingRight: "50px"}} variant="h6">
               {title}
             </Typography>
             <TextField
               placeholder="Search…"
               id="searchBar"
-              style={{ width: "28%", paddingLeft: "20px" }}
+              style={{ width: '27%'  , backgroundColor :'#f1f1f1'}}
               variant="outlined"
+              size="small"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <SearchIcon style={{ color: "black" }} />
+                    <SearchIcon />
                   </InputAdornment>
                 ),
                 style: { color: "black" },

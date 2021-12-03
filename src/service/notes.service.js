@@ -79,24 +79,6 @@ let setNotes = (data) => {
       });
   };
 
-  let setColor = (data, id) => {
-    let reqObj = {
-      method: "put",
-      url: config.url + "/notes/"+ id,
-      headers: {
-       
-        "Authorization" : "Bearer " + sessionStorage.getItem('token')
-      },
-      data:data
-    }
-    return axiosService.post(reqObj)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw err
-      });
-  }
   
   const setImage = (data) => {
     let reqobj = {
@@ -116,5 +98,5 @@ let setNotes = (data) => {
       });
   };
 
-export {setNotes , updateNote , setTrash , deleteNote , setColor , setImage}
+export {setNotes , updateNote , setTrash , deleteNote  , setImage}
   
