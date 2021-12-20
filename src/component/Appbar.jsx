@@ -106,7 +106,6 @@ const Appbar = ({ openDrawer, title, handleView, view }) => {
                 ),
                 style: { color: "black" },
               }}
-              onMouse
               onChange={(event) => handleSearch(event)}
             />
             <Grid container direction={"row"} sx={{ pl: 12 }}>
