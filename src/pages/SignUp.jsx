@@ -1,4 +1,4 @@
-import "../style/register.css";
+import "../styles/register.css";
 import logo from "../assets/images/images.jfif";
 import RainbowText from "react-rainbow-text";
 import React, { Component } from "react";

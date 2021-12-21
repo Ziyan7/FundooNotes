@@ -8,7 +8,7 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import { Link, useParams } from "react-router-dom";
-import "../style/forgotpassword.css";
+import "../styles/forgotpassword.css";
 import validation from "../config/validation";
 import { resetPassword } from "../service/signUp.service";
 

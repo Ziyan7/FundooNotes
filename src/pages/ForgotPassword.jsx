@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Grid, TextField, Typography, Button, Paper, FormHelperText } from "@material-ui/core";
 import * as Routing from "react-router-dom";
-import "../style/forgotpassword.css";
+import "../styles/forgotpassword.css";
 import validation from "../config/validation";
 import {forgetPassword} from "../service/signUp.service";
 import RainbowText from "react-rainbow-text";

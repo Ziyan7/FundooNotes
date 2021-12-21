@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, CardContent, Typography, CardMedia  } from "@mui/material";
 import Noteicons from "./Noteicons";
-import "../style/card.css"
+import "../styles/card.css"
 
 const NotesCard = ({ note, handlePopup, index, handleTrash }) => {
   let Borders;

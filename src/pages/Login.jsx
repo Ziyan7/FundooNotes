@@ -1,4 +1,4 @@
-import "../style/login.css";
+import "../styles/login.css";
 import RainbowText from "react-rainbow-text";
 import * as Routing from "react-router-dom";
 import React, { useState } from "react";
