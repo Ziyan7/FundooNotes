@@ -30,4 +30,4 @@ class validation {
   };
 }
 
-module.exports = new validation();
+export default new validation();
