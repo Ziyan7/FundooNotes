@@ -1,5 +1,5 @@
 import "../styles/register.css";
-import logo from "../assets/images/images.jfif";
+import logo from "../asset/image/images.jfif";
 import RainbowText from "react-rainbow-text";
 import React, { Component } from "react";
 import * as Routing from "react-router-dom";

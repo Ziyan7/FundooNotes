@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@mui/material/IconButton";
-import logo from "../assets/images/logo.png";
+import logo from "../asset/image/logo.png";
 import SettingsIconOutlinedIcon from "@material-ui/icons/SettingsOutlined";
 import AppsIcon from "@material-ui/icons/Apps";
 import ViewAgendaOutlinedIcon from "@mui/icons-material/ViewAgendaOutlined";
