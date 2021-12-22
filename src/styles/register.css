@@ -1,4 +1,4 @@
-.paperStyle {
+/* .paperStyle {
     padding: 20;
     margin: 20px auto;
     height: 70vh;
@@ -14,4 +14,34 @@
       width: 55%;
     }
   }
+   */
+
+
+
+.paperStyle {
+  padding: 20;
+    margin: 20px auto;
+    height: 70vh;
+    width: 45%;
+}
   
+
+  @media only screen and (max-width : 1365px  ) {
+    .paperStyle {
+      padding: 20;
+      padding-top: 20;
+      margin: 20px auto;
+      height: 90vh;
+      width: 55%;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 720px) {
+  .paperStyle {
+    padding: 20;
+    padding-top: 20;
+    margin: 20px auto;
+    height: 100vh;
+    width: 100%;
+  }
+}

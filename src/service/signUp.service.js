@@ -13,7 +13,6 @@ const register = (data) => {
   return axiosService
     .post(regObj)
     .then((data) => {
-      console.log(data)
       if(data.status === 200){
         return data;
        
