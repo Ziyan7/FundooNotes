@@ -105,7 +105,7 @@ const TrashBox = () => {
                   {note.image !== "" ? (
                     <CardMedia
                       component="img"
-                      image={`http://localhost:9000/images/${note.image}`}
+                      image={`https://fundoonote-backend.herokuapp.com/images/${note.image}`}
                       alt="image"
                       style={{ minHeight: "150px", maxHeight: "250px" }}
                     />

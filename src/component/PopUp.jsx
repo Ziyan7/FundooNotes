@@ -51,7 +51,7 @@ import {setUpdate} from "../redux/action"
     <Dialog onClose={handleClose} open={popup}>
        <CardMedia
             component="img"
-            image={`http://localhost:9000/images/${editNote.note.image}`}
+            image={`https://fundoonote-backend.herokuapp.com/images/${editNote.note.image}`}
             alt="image"
             style={{height : "250px" }}
           />

@@ -26,7 +26,7 @@ const NotesCard = ({ note, handlePopup, index, handleTrash }) => {
         {note.image !== "" ? (
           <CardMedia
             component="img"
-            image={`http://localhost:9000/images/${note.image}`}
+            image={`https://fundoonote-backend.herokuapp.com/images/${note.image}`}
             alt="image"
             style={{height : "170px" }}
           />
